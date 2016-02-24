@@ -18,3 +18,5 @@ Suggests: knitr,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
+URL: https://github.com/jotegui/GeospatialQualityR
+BugReports: https://github.com/jotegui/GeospatialQualityR/issues
