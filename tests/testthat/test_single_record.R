@@ -1,6 +1,10 @@
 library()
 context("Single record")
 
+test_that("get_single works with a vector object, called 'record'", {
+
+})
+
 test_that("get_single works properly", {
     lat <- -42.1833
     lng <- -1.8332

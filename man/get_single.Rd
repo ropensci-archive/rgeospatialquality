@@ -4,34 +4,41 @@
 \alias{get_single}
 \title{Calculate flags for a single record}
 \usage{
-get_single(decimalLatitude = NA, decimalLongitude = NA, countryCode = NA,
-  scientificName = "")
+get_single(record = NA, decimalLatitude = NA, decimalLongitude = NA,
+  countryCode = "", scientificName = "")
 }
 \arguments{
-\item{decimalLatitude}{Latitude in decimal degrees format (float, e.g.
-42.1833)}
+\item{record}{Vector-type object containing information on the record. If
+present, it MUST contain the following four named elements.}
 
-\item{decimalLongitude}{Longitude in decimal degrees format (float, e.g.
--1.8332)}
+\item{decimalLatitude}{Only if 'record' is not present. Latitude in decimal
+degrees format (float, e.g. 42.1833)}
 
-\item{countryCode}{Two or three-letter ISO-3166 country codes (string, e.g.
-"ES")}
+\item{decimalLongitude}{Only if 'record' is not present. Longitude in decimal
+degrees format (float, e.g. -1.8332)}
 
-\item{scientificName}{Binomial identifying the species (string, e.g. "Puma
-concolor")}
+\item{countryCode}{Only if 'record' is not present. Two or three-letter
+ISO-3166 country codes (string, e.g. "ES")}
+
+\item{scientificName}{Only if 'record' is not present. Binomial identifying
+the species (string, e.g. "Puma concolor")}
 }
 \value{
-The supplied record wih the geospatial quality flags
+A vector with the supplied record plus the geospatial quality flags
+  in the $flags element
 }
 \description{
 \code{get_single} calls the \code{GET} method of the API in order to extract
 the flags for an individual record
 }
 \examples{
-get_single(decimalLatitude=42.1833, decimalLongitude=-1.8332, countryCode="ES", scientificName="Puma concolor")
-}
-\seealso{
-\code{\link{http://bioinformatics.oxfordjournals.org/content/early/2016/02/16/bioinformatics.btw057}}
-  for more info on the API
+rec <- list(decimalLatitude=42.1833, decimalLongitude=-1.8332,
+            countryCode="ES", scientificName="Puma concolor")
+get_single(record=rec)
+
+# OR
+
+get_single(decimalLatitude=42.1833, decimalLongitude=-1.8332,
+           countryCode="ES", scientificName="Puma concolor")
 }
 
