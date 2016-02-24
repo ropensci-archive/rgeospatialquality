@@ -24,6 +24,7 @@
 #'
 #' get_single(decimalLatitude=42.1833, decimalLongitude=-1.8332,
 #'            countryCode="ES", scientificName="Puma concolor")
+#' @seealso \code{\link{get_multi}}
 #' @export
 get_single <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="") {
     # Parse parameters
