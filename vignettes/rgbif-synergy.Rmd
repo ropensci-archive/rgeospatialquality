@@ -1,0 +1,92 @@
+---
+title: "Using `rgeospatialquality` together with `rgbif`"
+author: "Javier Otegui <javier.otegui@gmail.com>"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using rgeospatialquality together with rgbif}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+The [Geospatial Quality API](https://www.github.com/vertnet/api-geospatial) (GQ API) is a REST API created to provide access to a set of basic geospatial assessment functions over sets of primary biodiversity records. This package, `rgeospatialquality`, is built as a wrapper for the GQ API. It provides native access to the methods of the API and allows to use its functions from within an R environment.
+
+In this document, I will show how this package can be used together with ROpenSci's `rgbif` to easily apply quality assessment functions to data downloaded through its methods.
+
+```{r loading, echo=FALSE}
+library(rgeospatialquality)
+```
+
+## Getting occurrence data with `rgbif` package
+
+Since version 0.9.2, `rgbif` package offers a new function called `occ_data`. According to the changelog:
+
+> (...) its primary purpose to perform faster data requests. Whereas occ_search() gives you lots of data, including taxonomic hierarchies and media records, occ_data() only gives occurrence data.
+([via](https://github.com/ropensci/rgbif/releases/tag/v0.9.2))
+
+This is a perfect function to show how to build synergies between both packages. We will use the `occ_data` method to download a set of records using any of the available filters and will pass the data to the `add_flags` function to directly assess the quality of the records.
+
+First, we need to download some records from GBIF with `occ_data`:
+
+```{r rgbif_extraction}
+library(rgbif)
+
+d <- occ_data(
+    scientificName="Apis mellifera",
+    limit=50,
+    minimal=FALSE
+)
+```
+
+We will extract just 50 records for the bee species *Apis mellifera*. The default value for limit is 500, but for the purpose of this example, we will stick to a smaller amount of records. `minimal=FALSE` allows us to get the full set of fields for each record and not only the three "basic" ones (see `occ_data` documentation for more info).
+
+This method returns a list with 2 elements, `meta` and `data`. We will operate with the records themselves, which can be found in the `data` element
+
+```{r rgbif_parsing}
+d <- d$data
+str(d)
+```
+
+## Data structure
+
+Both GBIF and the GQ API use [Darwin Core](http://rs.tdwg.org/dwc/terms/index.htm) (DwC) as the standard for biodiversity data exchange. This standard suggests certain specific names and formats for data values. In particular, the DwC suggests:
+
+* Coordinates be split in latitude and longitude
+* Latitude be stored in a field called [**decimalLatitude**](http://rs.tdwg.org/dwc/terms/index.htm#decimalLatitude) in [decimal degrees](https://en.wikipedia.org/wiki/Decimal_degrees) format
+* Longitude be stored in a field called [**decimalLongitude**](http://rs.tdwg.org/dwc/terms/index.htm#decimalLongitude) in [decimal degrees](https://en.wikipedia.org/wiki/Decimal_degrees) format
+* Country value be stored in a field called [**countryCode**](http://rs.tdwg.org/dwc/terms/index.htm#countryCode) following the [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) codification
+* Scientific name be stored in a field called [**scientificName**](http://rs.tdwg.org/dwc/terms/index.htm#scientificName). Due to the difficulty in parsing scientific names, the suggested case for the use of this API is to stick to the binomial (`genus` + `specificEpithet`)
+
+The data frame we obtained in the previuos step is already formatted according to the DwC standard:
+
+```{r rgbif_format}
+"decimalLatitude" %in% names(d)
+"decimalLongitude" %in% names(d)
+"countryCode" %in% names(d)
+"scientificName" %in% names(d)
+```
+
+Therefore, we don't need any further transformation of the data frame, and we can proceed to assess the geospatial quality of the records.
+
+## Sending the records to the GQ API
+
+We will use the `add_flags` function to assess the quality of a set of more than one record. This function is a wrapper for the `POST` method of the GQ API.
+
+Internally, the function transforms the content of the supplied `data.frame` to JSON and performs the `POST` request. Then, translates the results back from `JSON` to a new `data.frame`. The resulting object has the same structure as the provided one, with the addition of a `list`-type new element called `flags`. Inside that element, there are several sub-fields, each one with the result of a particular check. Please see the [GQ API documentation](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md) for more information on the functioning of the API.
+
+```{r api_call}
+dd <- add_flags(d)
+str(dd)
+dd[1,]$flags  # Flags for the first record
+```
+
+
+## References
+
++ Geospatial Quality API source code page - [https://github.com/VertNet/api-geospatial](https://github.com/VertNet/api-geospatial)
++ Geospatial Quality API documentation page - [https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md)
++ Geospatial Quality API scientific paper - [http://bioinformatics.oxfordjournals.org/content/early/2016/02/16/bioinformatics.btw057](http://bioinformatics.oxfordjournals.org/content/early/2016/02/16/bioinformatics.btw057)
++ rgbif - [https://github.com/ropensci/rgbif](https://github.com/ropensci/rgbif)
++ DarwinCore Standard - [http://rs.tdwg.org/dwc/terms/index.htm](http://rs.tdwg.org/dwc/terms/index.htm)

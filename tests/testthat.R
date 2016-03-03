@@ -1,4 +1,5 @@
 library(testthat)
-library(GeospatialQualityR)
+library(rgeospatialquality)
 
-test_check("GeospatialQualityR")
+test_check("rgeospatialquality")
+
