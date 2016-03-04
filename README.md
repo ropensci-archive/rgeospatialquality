@@ -8,7 +8,7 @@ Latest version is *0.1.0*
 Installation
 ------------
 
-Although we have plans to make this package available via CRAN as soon as possible, currently the only way to install it is via the `install_github` command, from `devtools` package. **Important note**: Windows users will need to install [Rtools](http://cran.r-project.org/bin/windows/Rtools/) first.
+Although we have plans to make this package available via CRAN, currently the only way to install it is via the `install_github` command, from `devtools` package. **Important note**: Windows users will need to install [Rtools](http://cran.r-project.org/bin/windows/Rtools/) first.
 
 ``` r
 install.packages("devtools")
