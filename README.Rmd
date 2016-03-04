@@ -1,3 +1,12 @@
+---
+title: "README"
+author: "Javier Otegui"
+date: "March 4, 2016"
+output:
+  md_document:
+    variant: markdown_github
+---
+
 rgeospatialquality
 ==================
 
@@ -5,29 +14,28 @@ rgeospatialquality
 
 Latest version is *0.1.0*
 
-Installation
-------------
+## Installation
 
 Although we have plans to make this package available via CRAN, currently the only way to install it is via the `install_github` command, from `devtools` package. **Important note**: Windows users will need to install [Rtools](http://cran.r-project.org/bin/windows/Rtools/) first.
 
-``` r
+```{r installation, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("jotegui/rgeospatialquality")
 ```
 
 `rgeospatialquality` depends on two packages:
 
-1.  `httr` to perform the `GET` and `POST` requests to the API URL
-2.  `jsonlite` to transform input data to JSON and to parse JSON responses to R native formats (`list` and `data.frame`)
+1. `httr` to perform the `GET` and `POST` requests to the API URL
+2. `jsonlite` to transform input data to JSON and to parse JSON responses to R native formats (`list` and `data.frame`)
 
-Also, it suggests the installation of ROpenSci's `rgbif` ([<https://github.com/ropensci/rgbif>](https://github.com/ropensci/rgbif)), for executing examples.
+Also, it suggests the installation of ROpenSci's `rgbif` ([https://github.com/ropensci/rgbif](https://github.com/ropensci/rgbif)), for executing examples.
 
-``` r
+
+```{r loading}
 library(rgeospatialquality)
 ```
 
-Get quality flags for single records
-------------------------------------
+## Get quality flags for single records
 
 There are two ways to assess single records and get information on their spatial quality: by providing a list-type object with named elements or by passing the required data via function arguments. In any case, flags are calculated with the function `flags`, and the result is a named list with the quality information.
 
@@ -35,7 +43,7 @@ The API works on four specific fields, which should be present to provide the mo
 
 ### Passing a record
 
-``` r
+```{r single_record, eval=FALSE}
 rec <- list(decimalLatitude=42.1833,
             decimalLongitude=-1.8332,
             countryCode="ES",
@@ -46,7 +54,7 @@ flags(record=rec)
 
 ### Passing individual values as arguments
 
-``` r
+```{r single_parameters, eval=FALSE}
 flags(decimalLatitude=42.1833,
       decimalLongitude=-1.8332,
       countryCode="ES",
@@ -59,42 +67,19 @@ The response is a list of named elements, each element being the result of a sin
 
 This is what any of the two calls above would return:
 
-    ## $hasCoordinates
-    ## [1] TRUE
-    ## 
-    ## $validCountry
-    ## [1] TRUE
-    ## 
-    ## $validCoordinates
-    ## [1] TRUE
-    ## 
-    ## $hasCountry
-    ## [1] TRUE
-    ## 
-    ## $coordinatesInsideCountry
-    ## [1] TRUE
-    ## 
-    ## $hasScientificName
-    ## [1] TRUE
-    ## 
-    ## $highPrecisionCoordinates
-    ## [1] TRUE
-    ## 
-    ## $coordinatesInsideRangeMap
-    ## [1] FALSE
-    ## 
-    ## $nonZeroCoordinates
-    ## [1] TRUE
-    ## 
-    ## $distanceToRangeMapInKm
-    ## [1] 6874.023
+```{r single_flags, echo=FALSE}
+flags(decimalLatitude=42.1833,
+      decimalLongitude=-1.8332,
+      countryCode="ES",
+      scientificName="Puma concolor")
+```
 
-Get quality flags for sets of more than one record
---------------------------------------------------
+
+## Get quality flags for sets of more than one record
 
 Apart from assessing records one by one, the API also allows sending a set of records to evaluate them all with a single call, using the `add_flags` function. Records must be provided in the form of a `data.frame`. Just as before, each record should have the four key fields (`decimalLatitude`, `decimalLongitude`, `countryCode` and `scientificName`) to give a response as accurate as possible, although none is mandatory. This time, however, the function returns the provided `data.frame` with a new column, called `flags`, consisting of a list of all geospatial quality assessment results.
 
-``` r
+```{r multi_dataframe, eval=FALSE}
 rec1 <- list(decimalLatitude=42.1833, decimalLongitude=-1.8332, countryCode="ES", scientificName="Puma concolor", ...)
 rec2 <- list(...)
 ...
@@ -102,11 +87,10 @@ df <- rbind(rec1, rec2, ...)
 df2 <- add_flags(df)
 ```
 
-One easy way to directly get occurrences with the right format is to use the `occ_data` function in ROpenSci's `rgbif` package ([<https://github.com/ropensci/rgbif>](https://github.com/ropensci/rgbif)). This package comes with a vignette (`rgbif-synergy`) illustrating how to integrate these two packages to improve the workflow of biodiversity data analysis.
+One easy way to directly get occurrences with the right format is to use the `occ_data` function in ROpenSci's `rgbif` package ([https://github.com/ropensci/rgbif](https://github.com/ropensci/rgbif)). This package comes with a vignette (`rgbif-synergy`) illustrating how to integrate these two packages to improve the workflow of biodiversity data analysis.
 
-Meta
-----
+## Meta
 
--   Please [report any issues or bugs](https://github.com/jotegui/rgeospatialquality/issues).
--   License: GPL-3
--   Get citation information doing `citation(package = 'rgeospatialquality')`
+* Please [report any issues or bugs](https://github.com/jotegui/rgeospatialquality/issues).
+* License: GPL-3
+* Get citation information doing `citation(package = 'rgeospatialquality')`
