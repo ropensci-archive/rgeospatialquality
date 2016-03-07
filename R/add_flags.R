@@ -28,12 +28,15 @@ add_flags <- function(indf=NA) {
     req_body <- jsonlite::toJSON(indf)
 
     # Make POST request
+    message("Launching API request... ", appendLF = FALSE)
     req <- httr::POST(BASE_URL, body=req_body)
+    message("done.")
 
     # Prepare response
+    message("Parsing output... ", appendLF = FALSE)
     resp <- gq_parse(req)
     if("flags" %in% names(resp)) indf$flags <- resp$flags
-
+    message("done.")
     indf
 }
 
