@@ -17,10 +17,13 @@
 #' d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
 #' d <- d$data
 #'
+#' # Format data.frame
+#' d <- format_gq(d, source="rgbif")
+#'
 #' # Execute the call to the API and store the results
 #' dd <- add_flags(d)
 #'
-#' @seealso \code{\link{flags}}
+#' @seealso \code{\link{flags}}, \code{\link{format_gq}}
 #'
 #' @export
 add_flags <- function(indf=NA, show_summary=TRUE, silent=FALSE) {
@@ -64,10 +67,10 @@ gq_parse_dataframe <- function(indf) {
 gq_show_summary <- function(flags) {
     message("\n=== SUMMARY ===")
     message(c(nrow(flags)," records parsed"))
-    message(c(sum(flags$hasCoordinates)," records with coordinates"))
-    message(c(sum(flags$validCoordinates)," records with valid coordinates"))
-    message(c(sum(flags$hasCountry)," records with country"))
-    message(c(sum(flags$validCountry)," records with valid country"))
+    message(c(sum(flags$hasCoordinates)," records with coordinates"), appendLF = FALSE)
+    message(c(" (",sum(flags$validCoordinates)," valid)"))
+    message(c(sum(flags$hasCountry)," records with country"), appendLF = FALSE)
+    message(c(" (",sum(flags$validCountry)," valid)"))
     message(c(sum(flags$hasScientificName)," records with scientific name"))
 
     message("=== GEOSPATIAL ===")
@@ -90,6 +93,8 @@ gq_show_summary <- function(flags) {
     }
 
     message("=== SPATIO-TAXONOMIC ===")
-
+    if(sum(!(flags$coordinatesInsideRangeMap), na.rm=TRUE) > 0) {
+        message(c(sum(!(flags$coordinatesInsideRangeMap), na.rm = TRUE), " record/s out of their species' range map"))
+    }
 
 }

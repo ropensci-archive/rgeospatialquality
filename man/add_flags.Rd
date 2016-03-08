@@ -28,11 +28,14 @@ the flags for a set of records
 d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
 d <- d$data
 
+# Format data.frame
+d <- format_gq(d, source="rgbif")
+
 # Execute the call to the API and store the results
 dd <- add_flags(d)
 
 }
 \seealso{
-\code{\link{flags}}
+\code{\link{flags}}, \code{\link{format_gq}}
 }
 
