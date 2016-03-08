@@ -5,6 +5,10 @@
 #'
 #' @param indf Required. Properly formatted data frame containing a row per
 #'   record
+#' @param show_summary Optional. Show a summary of the quality flags after the
+#'   process has finished. Defaults to TRUE
+#' @param silent Optional. Don't show any logging message at all. Defaults to
+#'   FALSE
 #'
 #' @return The provided data frame with the quality flags added as new columns
 #'
@@ -19,7 +23,7 @@
 #' @seealso \code{\link{flags}}
 #'
 #' @export
-add_flags <- function(indf=NA) {
+add_flags <- function(indf=NA, show_summary=TRUE, silent=FALSE) {
 
     # Parse input
     gq_parse_dataframe(indf)
@@ -28,15 +32,18 @@ add_flags <- function(indf=NA) {
     req_body <- jsonlite::toJSON(indf)
 
     # Make POST request
-    message("Launching API request... ", appendLF = FALSE)
+    if (!(silent)) message("Launching API request... ", appendLF = FALSE)
     req <- httr::POST(BASE_URL, body=req_body)
-    message("done.")
+    if (!(silent)) message("done.")
 
     # Prepare response
-    message("Parsing output... ", appendLF = FALSE)
+    if (!(silent)) message("Parsing output... ", appendLF = FALSE)
     resp <- gq_parse(req)
     if("flags" %in% names(resp)) indf$flags <- resp$flags
-    message("done.")
+    if (!(silent)) message("done.")
+
+    if (show_summary && !(silent)) gq_show_summary(resp$flags)
+
     indf
 }
 
@@ -51,5 +58,38 @@ gq_parse_dataframe <- function(indf) {
     if (!("decimalLongitude" %in% names(indf))) warning("'decimalLongitude' element missing")
     if (!("countryCode" %in% names(indf))) warning("'countryCode' element missing")
     if (!("scientificName" %in% names(indf))) warning("'scientificName' element missing")
+
+}
+
+gq_show_summary <- function(flags) {
+    message("\n=== SUMMARY ===")
+    message(c(nrow(flags)," records parsed"))
+    message(c(sum(flags$hasCoordinates)," records with coordinates"))
+    message(c(sum(flags$validCoordinates)," records with valid coordinates"))
+    message(c(sum(flags$hasCountry)," records with country"))
+    message(c(sum(flags$validCountry)," records with valid country"))
+    message(c(sum(flags$hasScientificName)," records with scientific name"))
+
+    message("=== GEOSPATIAL ===")
+    if(sum(!(flags$nonZeroCoordinates), na.rm = TRUE) > 0){
+        message(c(sum(!(flags$nonZeroCoordinates), na.rm=TRUE), " record/s with coordinates = 0,0"))
+    }
+    if(sum(!(flags$highPrecisionCoordinates), na.rm = TRUE) > 0) {
+        message(c(sum(!(flags$highPrecisionCoordinates), na.rm = TRUE), " record/s with low precision coordinates"))
+    }
+    if(sum(!(flags$coordinatesInsideCountry), na.rm = TRUE) > 0) {
+        message(c(sum(!(flags$coordinatesInsideCountry), na.rm = TRUE), " record/s with coordinate-country mismatch"), appendLF = FALSE)
+        if (sum(flags$negatedLatitude, na.rm = TRUE)>0 || sum(flags$negatedLongitude, na.rm = TRUE)>0 || sum(flags$transposedCoordinates, na.rm = TRUE)>0) {
+            message(", of which...")
+            if (sum(flags$negatedLatitude, na.rm = TRUE)>0) message(c("\t", sum(flags$negatedLatitude, na.rm = TRUE), " record/s with negated latitude"))
+            if (sum(flags$negatedLongitude, na.rm = TRUE)>0) message(c("\t", sum(flags$negatedLongitude, na.rm = TRUE), " record/s with negated longitude"))
+            if (sum(flags$transposedCoordinates, na.rm = TRUE)>0) message(c("\t", sum(flags$transposedCoordinates, na.rm = TRUE), " record/s with transposed coordinates"))
+        } else {
+            message("")
+        }
+    }
+
+    message("=== SPATIO-TAXONOMIC ===")
+
 
 }

@@ -4,11 +4,17 @@
 \alias{add_flags}
 \title{Calculate flags for a set of records and add them to the provided data frame}
 \usage{
-add_flags(indf = NA)
+add_flags(indf = NA, show_summary = TRUE, silent = FALSE)
 }
 \arguments{
 \item{indf}{Required. Properly formatted data frame containing a row per
 record}
+
+\item{show_summary}{Optional. Show a summary of the quality flags after the
+process has finished. Defaults to TRUE}
+
+\item{silent}{Optional. Don't show any logging message at all. Defaults to
+FALSE}
 }
 \value{
 The provided data frame with the quality flags added as new columns
