@@ -21,7 +21,10 @@ The provided data frame with the quality flags added as new columns
 }
 \description{
 \code{add_flags} calls the \code{POST} method of the API in order to extract
-the flags for a set of records
+the flags for a set of records. After finishing, the function returns the
+provided data.frame with a new column, \code{flags}, which holds for each
+record a list of the geospatial quality flags. It also shows a summary of the
+results, indicating how many records showed different types of issues.
 }
 \examples{
 # Using the rgbif package, prepare data
