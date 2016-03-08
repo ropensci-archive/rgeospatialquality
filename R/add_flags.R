@@ -40,8 +40,7 @@ add_flags <- function(indf=NA) {
 gq_parse_dataframe <- function(indf) {
 
     # Parse input object type
-    if(is.na(indf) || (is.data.frame(indf) && nrow(indf) == 0)) stop("Input data frame missing or empty")
-    if(!(is.data.frame(indf))) stop("Provided argument is not a data.frame")
+    gq_check_df(indf)
 
     # Parse input content completeness
     if (!("decimalLatitude" %in% names(indf))) warning("'decimalLatitude' element missing")
