@@ -76,13 +76,13 @@ gq_show_summary <- function(flags) {
     message(c(sum(flags$hasScientificName)," records with scientific name"))
 
     message("=== GEOSPATIAL ===")
-    if(sum(!(flags$nonZeroCoordinates), na.rm = TRUE) > 0){
+    if("nonZeroCoordinates" %in% names(flags) && sum(!(flags$nonZeroCoordinates), na.rm = TRUE) > 0){
         message(c(sum(!(flags$nonZeroCoordinates), na.rm=TRUE), " record/s with coordinates = 0,0"))
     }
-    if(sum(!(flags$highPrecisionCoordinates), na.rm = TRUE) > 0) {
+    if("highPrecisionCoordinates" %in% names(flags) && sum(!(flags$highPrecisionCoordinates), na.rm = TRUE) > 0) {
         message(c(sum(!(flags$highPrecisionCoordinates), na.rm = TRUE), " record/s with low precision coordinates"))
     }
-    if(sum(!(flags$coordinatesInsideCountry), na.rm = TRUE) > 0) {
+    if("coordinatesInsideCountry" %in% names(flags) && sum(!(flags$coordinatesInsideCountry), na.rm = TRUE) > 0) {
         message(c(sum(!(flags$coordinatesInsideCountry), na.rm = TRUE), " record/s with coordinate-country mismatch"), appendLF = FALSE)
         if (sum(flags$negatedLatitude, na.rm = TRUE)>0 || sum(flags$negatedLongitude, na.rm = TRUE)>0 || sum(flags$transposedCoordinates, na.rm = TRUE)>0) {
             message(", of which...")
@@ -94,9 +94,11 @@ gq_show_summary <- function(flags) {
         }
     }
 
-    message("=== SPATIO-TAXONOMIC ===")
-    if(sum(!(flags$coordinatesInsideRangeMap), na.rm=TRUE) > 0) {
-        message(c(sum(!(flags$coordinatesInsideRangeMap), na.rm = TRUE), " record/s out of their species' range map"))
+    if ("coordinatesInsideRangeMap" %in% names(flags)) {
+        message("=== SPATIO-TAXONOMIC ===")
+        if(sum(!(flags$coordinatesInsideRangeMap), na.rm=TRUE) > 0) {
+            message(c(sum(!(flags$coordinatesInsideRangeMap), na.rm = TRUE), " record/s out of their species' range map"))
+        }
     }
 
 }

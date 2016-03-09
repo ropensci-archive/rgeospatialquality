@@ -19,22 +19,9 @@ data multiple times from a source not available via the \code{source}
 argument. Either \code{source}, \code{config} or individual parameters must
 be present (see details).}
 
-\item{decimalLatitude}{Optional. Indicates the name of the column in the
-supplied data.frame that holds the latitude values. Either \code{source},
-\code{config} or individual parameters must be present (see details).}
-
-\item{decimalLongitude}{Optional. Indicates the name of the column in the
-supplied data.frame that holds the longitude values. Either \code{source},
-\code{config} or individual parameters must be present (see details).}
-
-\item{countryCode}{Optional. Indicates the name of the column in the supplied
-data.frame that holds the country code values. Either \code{source},
-\code{config} or individual parameters must be present (see details).}
-
-\item{scientificName}{Optional. Indicates the name of the column in the
-supplied data.frame that holds the scientific name binomial values. Either
-\code{source}, \code{config} or individual parameters must be present (see
-details).}
+\item{...}{Optional. If none of the previous is present, the four key
+arguments (\code{decimalLatitude}, \code{decimalLongitude},
+\code{countryCode}, \code{scientificName}) can be put here. See examples}
 }
 \value{
 The provided data frame, with field names changed to fit the API
