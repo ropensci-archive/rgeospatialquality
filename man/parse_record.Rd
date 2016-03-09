@@ -42,6 +42,6 @@ parse_record(decimalLatitude=42.1833, decimalLongitude=-1.8332,
 
 }
 \seealso{
-\code{\link{add_flags}}
+\code{\link{flags}}, \code{\link{add_flags}}
 }
 

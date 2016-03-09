@@ -26,7 +26,8 @@
 #' # Execute the call to the API and store the results
 #' dd <- add_flags(d)
 #'
-#' @seealso \code{\link{parse_record}}, \code{\link{format_gq}}
+#' @seealso \code{\link{format_gq}}, \code{\link{flags}},
+#'   \code{\link{parse_record}}
 #'
 #' @export
 add_flags <- function(indf=NA, show_summary=TRUE, silent=FALSE) {
