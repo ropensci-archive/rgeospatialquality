@@ -3,7 +3,7 @@ rgeospatialquality
 
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
-Latest version is *0.1.0*
+Latest version is *0.2.0*
 
 Installation
 ------------
@@ -20,7 +20,7 @@ devtools::install_github("jotegui/rgeospatialquality")
 1.  `httr` to perform the `GET` and `POST` requests to the API URL
 2.  `jsonlite` to transform input data to JSON and to parse JSON responses to R native formats (`list` and `data.frame`)
 
-Also, it suggests the installation of ROpenSci's `rgbif` ([<https://github.com/ropensci/rgbif>](https://github.com/ropensci/rgbif)), for executing examples.
+Also, it suggests the installation of ROpenSci's `rgbif` (<https://github.com/ropensci/rgbif>), for executing examples.
 
 ``` r
 library(rgeospatialquality)
@@ -29,7 +29,7 @@ library(rgeospatialquality)
 Get quality flags for single records
 ------------------------------------
 
-There are two ways to assess single records and get information on their spatial quality: by providing a list-type object with named elements or by passing the required data via function arguments. In any case, flags are calculated with the function `flags`, and the result is a named list with the quality information.
+There are two ways to assess single records and get information on their spatial quality: by providing a list-type object with named elements or by passing the required data via function arguments. In any case, flags are calculated with the function `parse_record`, and the result is a named list with the quality information.
 
 The API works on four specific fields, which should be present to provide the most complete answer: `decimalLatitude`, `decimalLongitude`, `countryCode` and `scientificName`. None of them is mandatory, but the more complete the provided information, the better the result set will be. [See the API documentation](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md).
 
@@ -41,16 +41,16 @@ rec <- list(decimalLatitude=42.1833,
             countryCode="ES",
             scientificName="Puma concolor")
 
-flags(record=rec)
+parse_record(record=rec)
 ```
 
 ### Passing individual values as arguments
 
 ``` r
-flags(decimalLatitude=42.1833,
-      decimalLongitude=-1.8332,
-      countryCode="ES",
-      scientificName="Puma concolor")
+parse_record(decimalLatitude=42.1833,
+             decimalLongitude=-1.8332,
+             countryCode="ES",
+             scientificName="Puma concolor")
 ```
 
 ### Structure of response
@@ -102,7 +102,7 @@ df <- rbind(rec1, rec2, ...)
 df2 <- add_flags(df)
 ```
 
-One easy way to directly get occurrences with the right format is to use the `occ_data` function in ROpenSci's `rgbif` package ([<https://github.com/ropensci/rgbif>](https://github.com/ropensci/rgbif)). This package comes with a vignette (`rgbif-synergy`) illustrating how to integrate these two packages to improve the workflow of biodiversity data analysis.
+One easy way to directly get occurrences with the right format is to use the `occ_data` function in ROpenSci's `rgbif` package (<https://github.com/ropensci/rgbif>). There is a vignette (`rgbif-synergy`) illustrating how to integrate the two packages to improve the workflow of biodiversity data analysis.
 
 Meta
 ----
