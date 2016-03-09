@@ -1,6 +1,6 @@
 #' Calculate flags for a single record
 #'
-#' \code{flags} calls the \code{GET} method of the API in order to extract
+#' \code{parse_record} calls the \code{GET} method of the API in order to extract
 #' the flags for an individual record. It returns just the \code{flags} element
 #'
 #' @param record List-type object containing information on the record. If
@@ -19,17 +19,17 @@
 #' @examples
 #' rec <- list(decimalLatitude=42.1833, decimalLongitude=-1.8332,
 #'             countryCode="ES", scientificName="Puma concolor")
-#' flags(record=rec)
+#' parse_record(record=rec)
 #'
 #' # OR
 #'
-#' flags(decimalLatitude=42.1833, decimalLongitude=-1.8332,
+#' parse_record(decimalLatitude=42.1833, decimalLongitude=-1.8332,
 #'            countryCode="ES", scientificName="Puma concolor")
 #'
 #' @seealso \code{\link{add_flags}}
 #'
 #' @export
-flags <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="") {
+parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="") {
     # Parse parameters
     if (!missing(record)) {
         params <- gq_parse_record(record)

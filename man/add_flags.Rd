@@ -39,6 +39,6 @@ dd <- add_flags(d)
 
 }
 \seealso{
-\code{\link{flags}}, \code{\link{format_gq}}
+\code{\link{parse_record}}, \code{\link{format_gq}}
 }
 

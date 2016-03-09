@@ -7,7 +7,7 @@ test_that("flags works with a list object, called 'record'", {
         "countryCode"="ES",
         "scientificName"="Puma concolor"
     )
-    resp <- flags(rec)
+    resp <- parse_record(rec)
 
     expect_true(resp$negatedLatitude)
     expect_false(resp$coordinatesInsideCountry)
@@ -19,7 +19,7 @@ test_that("flags works properly", {
     lng <- -1.8332
     ccd <- "ES"
     scn <- "Puma concolor"
-    resp <- flags(decimalLatitude = lat, decimalLongitude = lng, countryCode = ccd, scientificName = scn)
+    resp <- parse_record(decimalLatitude = lat, decimalLongitude = lng, countryCode = ccd, scientificName = scn)
 
     # Check that some critical flags are right
     expect_true(resp$negatedLatitude)

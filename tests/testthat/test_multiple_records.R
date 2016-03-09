@@ -46,18 +46,3 @@ test_that("add_flags plays well with rgbif", {
     expect_equal(nrow(dd), 50)
     expect_true("flags" %in% names(dd))
 })
-
-test_that("flags works properly", {
-    lat <- -42.1833
-    lng <- -1.8332
-    ccd <- "ES"
-    scn <- "Puma concolor"
-    resp <- flags(decimalLatitude = lat, decimalLongitude = lng, countryCode = ccd, scientificName = scn)
-
-    # Check that some critical flags are right
-    expect_true(resp$negatedLatitude)
-    expect_false(resp$coordinatesInsideCountry)
-    expect_equal(resp$distanceToRangeMapInKm, 5114.433)
-
-})
-
