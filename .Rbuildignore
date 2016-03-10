@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^vignettes/rsconnect*$
 ^README\.Rmd$
+^\.travis\.yml$

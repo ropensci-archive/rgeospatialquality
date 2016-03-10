@@ -1,9 +1,11 @@
 rgeospatialquality
 ==================
 
+[![Travis-CI Build Status](https://travis-ci.org/jotegui/rgeospatialquality.svg?branch=master)](https://travis-ci.org/jotegui/rgeospatialquality)
+
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
-Latest version is *0.2.1*
+Latest version is *0.2.2*
 
 Installation
 ------------
@@ -110,3 +112,5 @@ Meta
 -   Please [report any issues or bugs](https://github.com/jotegui/rgeospatialquality/issues).
 -   License: GPL-3
 -   Get citation information doing `citation(package = 'rgeospatialquality')`
+
+[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
