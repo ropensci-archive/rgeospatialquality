@@ -2,4 +2,8 @@
 
 language: r
 warnings_are_errors: true
-sudo: required
+sudo: false
+addons:
+  apt:
+    packages:
+      - libv8-dev
