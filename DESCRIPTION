@@ -12,12 +12,13 @@ License: file LICENSE
 LazyData: TRUE
 Imports:
     httr (>= 1.0.0),
-    jsonlite (>= 0.9.19)
+    jsonlite (>= 0.9.19),
+    rgbif (>=0.9.2)
 RoxygenNote: 5.0.1
 Suggests: knitr,
+    roxygen2,
     rmarkdown,
-    testthat,
-    rgbif (>= 0.9.2)
+    testthat
 VignetteBuilder: knitr
 URL: https://github.com/jotegui/rgeospatialquality
 BugReports: https://github.com/jotegui/rgeospatialquality/issues
