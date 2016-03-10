@@ -25,6 +25,8 @@ the flags for a set of records. After finishing, the function returns the
 provided data.frame with a new column, \code{flags}, which holds for each
 record a list of the geospatial quality flags. It also shows a summary of the
 results, indicating how many records showed different types of issues.
+\strong{NOTE:} currently, the API imposes a hard-limit of 1000 records per
+request, to avoid malfunctioning due to some third-party library limtations.
 }
 \examples{
 # Using the rgbif package, prepare data

@@ -5,6 +5,8 @@
 #' provided data.frame with a new column, \code{flags}, which holds for each
 #' record a list of the geospatial quality flags. It also shows a summary of the
 #' results, indicating how many records showed different types of issues.
+#' \strong{NOTE:} currently, the API imposes a hard-limit of 1000 records per
+#' request, to avoid malfunctioning due to some third-party library limtations.
 #'
 #' @param indf Required. Properly formatted data frame containing a row per
 #'   record
@@ -64,6 +66,8 @@ gq_parse_dataframe <- function(indf) {
     if (!("decimalLongitude" %in% names(indf))) warning("'decimalLongitude' element missing")
     if (!("countryCode" %in% names(indf))) warning("'countryCode' element missing")
     if (!("scientificName" %in% names(indf))) warning("'scientificName' element missing")
+
+    if(nrow(indf)>1000) stop("Too many records. The API has a hard-limit of 1000 records per request")
 
 }
 
