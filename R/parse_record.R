@@ -32,7 +32,7 @@
 #' @export
 parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="", ...) {
     # Parse parameters
-    if (!missing(record)) {
+    if (!is.na(record)) {
         params <- gq_parse_record(record)
     } else {
         params <- list(
