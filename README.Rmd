@@ -11,6 +11,7 @@ rgeospatialquality
 ==================
 
 [![Travis-CI Build Status](https://travis-ci.org/jotegui/rgeospatialquality.svg?branch=master)](https://travis-ci.org/jotegui/rgeospatialquality)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jotegui/rgeospatialquality?branch=master&svg=true)](https://ci.appveyor.com/project/jotegui/rgeospatialquality)
 [![codecov.io](https://codecov.io/github/jotegui/rgeospatialquality/coverage.svg?branch=master)](https://codecov.io/github/jotegui/rgeospatialquality?branch=master)
 
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
