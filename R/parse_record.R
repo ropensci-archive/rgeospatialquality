@@ -33,6 +33,9 @@
 parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="", ...) {
     # Parse parameters
     if (!is.na(record)) {
+        if (!is.na(decimalLatitude) || !is.na(decimalLongitude) || countryCode!="" || scientificName != "") {
+            stop("Both \"record\" and other named parameters are provided. You should select one of the two methods.\nPlease see ?parse_record for more information.")
+        }
         params <- gq_parse_record(record)
     } else {
         params <- list(
