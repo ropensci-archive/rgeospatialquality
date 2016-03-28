@@ -3,3 +3,4 @@
 ^vignettes/rsconnect*$
 ^README\.Rmd$
 ^\.travis\.yml$
+^CONDUCT\.md$
