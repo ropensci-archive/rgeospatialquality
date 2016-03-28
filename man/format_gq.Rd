@@ -73,7 +73,7 @@ if (requireNamespace("rgbif", quietly=TRUE)) {
  # Using a configuration object, matches 'rinat' schema
  conf <- list(decimalLatitude="latitude",
               decimalLongitude="longitude",
-              countryCode=NA,
+              countryCode=NULL,
               scientificName="scientific_name")
  d <- format_gq(d, config=conf)
 
