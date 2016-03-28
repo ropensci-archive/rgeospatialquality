@@ -1,12 +1,12 @@
 Package: rgeospatialquality
 Type: Package
-Title: R Wrapper for the Geospatial Data Quality REST API
+Title: Wrapper for the Geospatial Data Quality REST API
 Version: 0.2.2
 Date: 2016-02-22
 Authors@R: person("Javier", "Otegui", email="javier.otegui@gmail.com",
     role=c("aut", "cre"))
 Description: This package provides native wrappers for the functions available
-    via de spatial quality REST API. More information on the API can be found
+    via the spatial quality REST API. More information on the API can be found
     here: http://bit.ly/bioinformatics_btw057.
 License: MIT
 LazyData: TRUE
