@@ -18,7 +18,8 @@ RoxygenNote: 5.0.1
 Suggests: knitr,
     roxygen2,
     rmarkdown,
-    testthat
+    testthat,
+    covr
 VignetteBuilder: knitr
 URL: https://github.com/jotegui/rgeospatialquality
 BugReports: https://github.com/jotegui/rgeospatialquality/issues
