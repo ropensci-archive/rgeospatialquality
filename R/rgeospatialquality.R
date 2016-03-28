@@ -34,4 +34,6 @@
 #'
 #' @docType package
 #' @name rgeospatialquality
+#' @importFrom httr POST GET content
+#' @importFrom jsonlite toJSON
 NULL

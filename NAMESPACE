@@ -3,3 +3,7 @@
 export(add_flags)
 export(format_gq)
 export(parse_record)
+importFrom(httr,GET)
+importFrom(httr,POST)
+importFrom(httr,content)
+importFrom(jsonlite,toJSON)
