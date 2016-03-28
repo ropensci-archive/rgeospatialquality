@@ -30,10 +30,10 @@
 #' @seealso \code{\link{flags}}, \code{\link{add_flags}}
 #'
 #' @export
-parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="", ...) {
+parse_record <- function(record=NULL, decimalLatitude=NULL, decimalLongitude=NULL, countryCode=NULL, scientificName=NULL, ...) {
     # Parse parameters
-    if (!is.na(record)) {
-        if (!is.na(decimalLatitude) || !is.na(decimalLongitude) || countryCode!="" || scientificName != "") {
+    if (!is.null(record)) {
+        if (!is.null(decimalLatitude) || !is.null(decimalLongitude) || !is.null(countryCode) || !is.null(scientificName)) {
             stop("Both \"record\" and other named parameters are provided. You should select one of the two methods.\nPlease see ?parse_record for more information.")
         }
         params <- gq_parse_record(record)
@@ -44,7 +44,7 @@ parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, cou
             countryCode=countryCode,
             scientificName=scientificName
         )
-        params <- gq_parse_params(params)
+        params <- plyr::compact(params)
     }
     # Make GET request
     req <- httr::GET(BASE_URL, query=params, ...)
@@ -73,15 +73,6 @@ gq_parse_record <- function(record) {
     } else {
         params$scientificName <- ""
     }
-
-    params
-}
-
-gq_parse_params <- function(params) {
-    if(is.na(params$decimalLatitude)) params$decimalLatitude=""
-    if(is.na(params$decimalLongitude)) params$decimalLongitude=""
-    if(is.na(params$countryCode)) params$countryCode=""
-    if(is.na(params$scientificName)) params$scientificName=""
 
     params
 }

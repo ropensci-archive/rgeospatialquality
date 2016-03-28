@@ -36,4 +36,5 @@
 #' @name rgeospatialquality
 #' @importFrom httr POST GET content
 #' @importFrom jsonlite toJSON
+#' @importFrom plyr compact
 NULL

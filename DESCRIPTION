@@ -12,7 +12,8 @@ License: MIT
 LazyData: TRUE
 Imports:
     httr (>= 1.0.0),
-    jsonlite (>= 0.9.19)
+    jsonlite (>= 0.9.19),
+    plyr (>= 1.8.3)
 RoxygenNote: 5.0.1
 Suggests: knitr,
     roxygen2,

@@ -4,8 +4,8 @@
 \alias{parse_record}
 \title{Calculate flags for a single record}
 \usage{
-parse_record(record = NA, decimalLatitude = NA, decimalLongitude = NA,
-  countryCode = "", scientificName = "", ...)
+parse_record(record = NULL, decimalLatitude = NULL,
+  decimalLongitude = NULL, countryCode = NULL, scientificName = NULL, ...)
 }
 \arguments{
 \item{record}{List-type object containing information on the record. If
