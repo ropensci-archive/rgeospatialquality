@@ -14,6 +14,7 @@
 #'   process has finished. Defaults to TRUE
 #' @param silent Optional. Don't show any logging message at all. Defaults to
 #'   FALSE
+#' @param ... Any extra parameters for \code{httr} \code{\link{POST}}
 #'
 #' @return The provided data frame with the quality flags added as new columns
 #'
@@ -35,7 +36,7 @@
 #'   \code{\link{parse_record}}
 #'
 #' @export
-add_flags <- function(indf=NA, show_summary=TRUE, silent=FALSE) {
+add_flags <- function(indf=NA, show_summary=TRUE, silent=FALSE, ...) {
 
     # Parse input
     gq_parse_dataframe(indf)
@@ -45,7 +46,7 @@ add_flags <- function(indf=NA, show_summary=TRUE, silent=FALSE) {
 
     # Make POST request
     if (!(silent)) message("Launching API request... ", appendLF = FALSE)
-    req <- httr::POST(BASE_URL, body=req_body)
+    req <- httr::POST(BASE_URL, body=req_body, ...)
     if (!(silent)) message("done.")
 
     # Prepare response

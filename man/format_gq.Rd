@@ -61,23 +61,25 @@ of the DarwinCore Standard. See the examples section.
 }
 \examples{
 # Using the rgbif package and the source argument
-d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
-d <- d$data
-d <- format_gq(d, source="rgbif")
+if (requireNamespace("rgbif", quietly=TRUE)) {
+ d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
+ d <- d$data
+ d <- format_gq(d, source="rgbif")
 
-# Using a configuration object, matches 'rinat' schema
-conf <- list(decimalLatitude="latitude",
-             decimalLongitude="longitude",
-             countryCode=NA,
-             scientificName="scientific_name")
-d <- format_gq(d, config=conf)
+ # Using a configuration object, matches 'rinat' schema
+ conf <- list(decimalLatitude="latitude",
+              decimalLongitude="longitude",
+              countryCode=NA,
+              scientificName="scientific_name")
+ d <- format_gq(d, config=conf)
 
-# Passing individual parameters, all optional
-d <- format_gq(d,
-               decimalLatitude="lat",
-               decimalLongitude="lng",
-               countryCode="ccode",
-               scientificName="sciname")
+ # Passing individual parameters, all optional
+ d <- format_gq(d,
+                decimalLatitude="lat",
+                decimalLongitude="lng",
+                countryCode="ccode",
+                scientificName="sciname")
+}
 }
 \seealso{
 \code{\link{add_flags}}

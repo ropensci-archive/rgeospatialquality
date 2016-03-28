@@ -4,7 +4,7 @@
 \alias{add_flags}
 \title{Calculate flags for a set of records and add them to the provided data frame}
 \usage{
-add_flags(indf = NA, show_summary = TRUE, silent = FALSE)
+add_flags(indf = NA, show_summary = TRUE, silent = FALSE, ...)
 }
 \arguments{
 \item{indf}{Required. Properly formatted data frame containing a row per
@@ -15,6 +15,8 @@ process has finished. Defaults to TRUE}
 
 \item{silent}{Optional. Don't show any logging message at all. Defaults to
 FALSE}
+
+\item{...}{Any extra parameters for \code{httr} \code{\link{POST}}}
 }
 \value{
 The provided data frame with the quality flags added as new columns
@@ -30,14 +32,17 @@ request, to avoid malfunctioning due to some third-party library limtations.
 }
 \examples{
 # Using the rgbif package, prepare data
-d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
-d <- d$data
+if (requireNamespace("rgbif", quietly=TRUE)) {
+ library("rgbif")
+ d <- occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
+ d <- d$data
 
-# Format data.frame
-d <- format_gq(d, source="rgbif")
+ # Format data.frame
+ d <- format_gq(d, source="rgbif")
 
-# Execute the call to the API and store the results
-dd <- add_flags(d)
+ # Execute the call to the API and store the results
+ dd <- add_flags(d)
+}
 
 }
 \seealso{

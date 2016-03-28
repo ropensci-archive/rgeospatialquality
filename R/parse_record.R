@@ -13,6 +13,7 @@
 #'   ISO-3166 country codes (string, e.g. "ES")
 #' @param scientificName Only if 'record' is not present. Binomial identifying
 #'   the species (string, e.g. "Puma concolor")
+#' @param ... Any extra parameters for \code{httr} \code{\link{GET}}
 #'
 #' @return A named list with the geospatial quality flags
 #'
@@ -29,7 +30,7 @@
 #' @seealso \code{\link{flags}}, \code{\link{add_flags}}
 #'
 #' @export
-parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="") {
+parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, countryCode="", scientificName="", ...) {
     # Parse parameters
     if (!missing(record)) {
         params <- gq_parse_record(record)
@@ -43,7 +44,7 @@ parse_record <- function(record=NA, decimalLatitude=NA, decimalLongitude=NA, cou
         params <- gq_parse_params(params)
     }
     # Make GET request
-    req <- httr::GET(BASE_URL, query=params)
+    req <- httr::GET(BASE_URL, query=params, ...)
 
     # Parse and return response
     resp <- gq_parse(req)

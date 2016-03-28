@@ -5,7 +5,7 @@
 \title{Calculate flags for a single record}
 \usage{
 parse_record(record = NA, decimalLatitude = NA, decimalLongitude = NA,
-  countryCode = "", scientificName = "")
+  countryCode = "", scientificName = "", ...)
 }
 \arguments{
 \item{record}{List-type object containing information on the record. If
@@ -22,6 +22,8 @@ ISO-3166 country codes (string, e.g. "ES")}
 
 \item{scientificName}{Only if 'record' is not present. Binomial identifying
 the species (string, e.g. "Puma concolor")}
+
+\item{...}{Any extra parameters for \code{httr} \code{\link{GET}}}
 }
 \value{
 A named list with the geospatial quality flags
