@@ -19,14 +19,17 @@
 #'
 #' @examples
 #' # Using the rgbif package, prepare data
-#' d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
-#' d <- d$data
+#' if (requireNamespace("rgbif", quietly=TRUE)) {
+#'  library("rgbif")
+#'  d <- occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
+#'  d <- d$data
 #'
-#' # Format data.frame
-#' d <- format_gq(d, source="rgbif")
+#'  # Format data.frame
+#'  d <- format_gq(d, source="rgbif")
 #'
-#' # Execute the call to the API and store the results
-#' dd <- add_flags(d)
+#'  # Execute the call to the API and store the results
+#'  dd <- add_flags(d)
+#' }
 #'
 #' @seealso \code{\link{format_gq}}, \code{\link{flags}},
 #'   \code{\link{parse_record}}
