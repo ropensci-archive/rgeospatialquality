@@ -8,7 +8,7 @@ Authors@R: person("Javier", "Otegui", email="javier.otegui@gmail.com",
 Description: This package provides native wrappers for the functions available
     via de spatial quality REST API. More information on the API can be found
     here: http://bit.ly/bioinformatics_btw057.
-License: file LICENSE
+License: MIT
 LazyData: TRUE
 Imports:
     httr (>= 1.0.0),
