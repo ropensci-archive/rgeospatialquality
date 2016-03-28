@@ -4,7 +4,7 @@
 \alias{format_gq}
 \title{Prepare data frame for flagging functions}
 \usage{
-format_gq(indf = NA, source = NA, config = NA, ...)
+format_gq(indf = NA, source = NA, config = NA, quiet = FALSE, ...)
 }
 \arguments{
 \item{indf}{Required. The data.frame on which to operate.}
@@ -18,6 +18,9 @@ names from the data.frame to the DarwinCore standard. Useful when importing
 data multiple times from a source not available via the \code{source}
 argument. Either \code{source}, \code{config} or individual parameters must
 be present (see details).}
+
+\item{quiet}{Optional. Don't show any logging message at all. Defaults to
+FALSE.}
 
 \item{...}{Optional. If none of the previous is present, the four key
 arguments (\code{decimalLatitude}, \code{decimalLongitude},

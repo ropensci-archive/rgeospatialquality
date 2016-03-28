@@ -39,6 +39,8 @@
 #'   data multiple times from a source not available via the \code{source}
 #'   argument. Either \code{source}, \code{config} or individual parameters must
 #'   be present (see details).
+#' @param quiet Optional. Don't show any logging message at all. Defaults to
+#'   FALSE.
 #' @param ... Optional. If none of the previous is present, the four key
 #'   arguments (\code{decimalLatitude}, \code{decimalLongitude},
 #'   \code{countryCode}, \code{scientificName}) can be put here. See examples
@@ -70,22 +72,22 @@
 #' @seealso \code{\link{add_flags}}
 #'
 #' @export
-format_gq <- function(indf=NA, source=NA, config=NA, ...) {
+format_gq <- function(indf=NA, source=NA, config=NA, quiet=FALSE, ...) {
 
     # Parse input object type
     gq_check_df(indf)
 
     # Mapping via 'source'
     if (!(is.na(source))) {
-        message(c("Mapping according to ", source, " format"))
+        if (!(quiet)) message(c("Mapping according to ", source, " format"))
         new_fields = gq_get_source(source)
     # Mapping via 'config'
     } else if (!(is.na(config))) {
-        message("Mapping according to config object")
+        if (!(quiet)) message("Mapping according to config object")
         new_fields = gq_parse_config(config)
     # Mapping via individual parameters
     } else {
-        message("Mapping via individual parameters")
+        if (!(quiet)) message("Mapping via individual parameters")
         new_fields = gq_parse_args(list(...))
     }
 
@@ -94,40 +96,40 @@ format_gq <- function(indf=NA, source=NA, config=NA, ...) {
         if (new_fields$decimalLatitude %in% names(indf)) {
             if ("decimalLatitude" %in% names(indf)) {
                 names(indf)[names(indf)=="decimalLatitude"] <- "decimalLatitude::original"
-                message("Changed \"decimalLatitude\" to \"decimalLatitude::original\"")
+                if (!(quiet)) message("Changed \"decimalLatitude\" to \"decimalLatitude::original\"")
             }
             names(indf)[names(indf)==new_fields$decimalLatitude] <- "decimalLatitude"
-            message(c("Changed \"",new_fields$decimalLatitude,"\" to \"decimalLatitude\""))
+            if (!(quiet)) message(c("Changed \"",new_fields$decimalLatitude,"\" to \"decimalLatitude\""))
         }
     }
     if (!(is.na(new_fields$decimalLongitude)) && new_fields$decimalLongitude != "decimalLongitude") {
         if (new_fields$decimalLongitude %in% names(indf)) {
             if ("decimalLongitude" %in% names(indf)) {
                 names(indf)[names(indf)=="decimalLongitude"] <- "decimalLongitude::original"
-                message("Changed \"decimalLongitude\" to \"decimalLongitude::original\"")
+                if (!(quiet)) message("Changed \"decimalLongitude\" to \"decimalLongitude::original\"")
             }
             names(indf)[names(indf)==new_fields$decimalLongitude] <- "decimalLongitude"
-            message(c("Changed \"",new_fields$decimalLongitude,"\" to \"decimalLongitude\""))
+            if (!(quiet)) message(c("Changed \"",new_fields$decimalLongitude,"\" to \"decimalLongitude\""))
         }
     }
     if (!(is.na(new_fields$countryCode)) && new_fields$countryCode != "countryCode") {
         if (new_fields$countryCode %in% names(indf)) {
             if ("countryCode" %in% names(indf)) {
                 names(indf)[names(indf)=="countryCode"] <- "countryCode::original"
-                message("Changed \"countryCode\" to \"countryCode::original\"")
+                if (!(quiet)) message("Changed \"countryCode\" to \"countryCode::original\"")
             }
             names(indf)[names(indf)==new_fields$countryCode] <- "countryCode"
-            message(c("Changed \"",new_fields$countryCode,"\" to \"countryCode\""))
+            if (!(quiet)) message(c("Changed \"",new_fields$countryCode,"\" to \"countryCode\""))
         }
     }
     if (!(is.na(new_fields$scientificName)) && new_fields$scientificName != "scientificName") {
         if (new_fields$scientificName %in% names(indf)) {
             if ("scientificName" %in% names(indf)) {
                 names(indf)[names(indf)=="scientificName"] <- "scientificName::original"
-                message("Changed \"scientificName\" to \"scientificName::original\"")
+                if (!(quiet)) message("Changed \"scientificName\" to \"scientificName::original\"")
             }
             names(indf)[names(indf)==new_fields$scientificName] <- "scientificName"
-            message(c("Changed \"",new_fields$scientificName,"\" to \"scientificName\""))
+            if (!(quiet)) message(c("Changed \"",new_fields$scientificName,"\" to \"scientificName\""))
         }
     }
 
