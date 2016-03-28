@@ -32,8 +32,9 @@
 #'
 #' @param indf Required. The data.frame on which to operate.
 #' @param source Optional. Indicates the package that was used to retrieve the
-#'   data. Examples are "rvertnet", "rgbif" or "rinat". Either \code{source},
-#'   \code{config} or individual parameters must be present (see details).
+#'   data. Currently accepted values are "rvertnet", "rgbif" or "rinat". Either
+#'   \code{source}, \code{config} or individual parameters must be present (see
+#'   details).
 #' @param config Optional. Configuration object indicating mapping of field
 #'   names from the data.frame to the DarwinCore standard. Useful when importing
 #'   data multiple times from a source not available via the \code{source}
@@ -43,7 +44,7 @@
 #'   FALSE.
 #' @param ... Optional. If none of the previous is present, the four key
 #'   arguments (\code{decimalLatitude}, \code{decimalLongitude},
-#'   \code{countryCode}, \code{scientificName}) can be put here. See examples
+#'   \code{countryCode}, \code{scientificName}) can be put here. See examples.
 #'
 #' @return The provided data frame, with field names changed to fit the API
 #'   functioning.
@@ -79,6 +80,7 @@ format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
 
     # Mapping via 'source'
     if (!(is.na(source))) {
+        match.arg(source, sources_list)
         if (!(quiet)) message(c("Mapping according to ", source, " format"))
         new_fields = gq_get_source(source)
     # Mapping via 'config'
@@ -135,6 +137,12 @@ format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
 
     indf
 }
+
+sources_list <- c(
+    "rgbif",
+    "rvertnet",
+    "rinat"
+)
 
 gq_get_source <- function(source) {
     gq_sources <- list(
