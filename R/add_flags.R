@@ -36,7 +36,7 @@
 #'   \code{\link{parse_record}}
 #'
 #' @export
-add_flags <- function(indf=NA, show_summary=TRUE, quiet=FALSE, ...) {
+add_flags <- function(indf, show_summary=TRUE, quiet=FALSE, ...) {
 
     # Parse input
     gq_parse_dataframe(indf)

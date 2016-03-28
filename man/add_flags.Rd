@@ -4,7 +4,7 @@
 \alias{add_flags}
 \title{Calculate flags for a set of records and add them to the provided data frame}
 \usage{
-add_flags(indf = NA, show_summary = TRUE, quiet = FALSE, ...)
+add_flags(indf, show_summary = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{indf}{Required. Properly formatted data frame containing a row per
