@@ -73,18 +73,18 @@
 #' @seealso \code{\link{add_flags}}
 #'
 #' @export
-format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
+format_gq <- function(indf, source=NULL, config=NULL, quiet=FALSE, ...) {
 
     # Parse input object type
     gq_check_df(indf)
 
     # Mapping via 'source'
-    if (!(is.na(source))) {
+    if (!(is.null(source))) {
         match.arg(source, sources_list)
         if (!(quiet)) message(c("Mapping according to ", source, " format"))
         new_fields = gq_get_source(source)
     # Mapping via 'config'
-    } else if (!(is.na(config))) {
+    } else if (!(is.null(config))) {
         if (!(quiet)) message("Mapping according to config object")
         new_fields = gq_parse_config(config)
     # Mapping via individual parameters
@@ -94,7 +94,7 @@ format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
     }
 
     # Apply the transformation
-    if (!(is.na(new_fields$decimalLatitude)) && new_fields$decimalLatitude != "decimalLatitude") {
+    if (!(is.null(new_fields$decimalLatitude)) && new_fields$decimalLatitude != "decimalLatitude") {
         if (new_fields$decimalLatitude %in% names(indf)) {
             if ("decimalLatitude" %in% names(indf)) {
                 names(indf)[names(indf)=="decimalLatitude"] <- "decimalLatitude::original"
@@ -104,7 +104,7 @@ format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
             if (!(quiet)) message(c("Changed \"",new_fields$decimalLatitude,"\" to \"decimalLatitude\""))
         }
     }
-    if (!(is.na(new_fields$decimalLongitude)) && new_fields$decimalLongitude != "decimalLongitude") {
+    if (!(is.null(new_fields$decimalLongitude)) && new_fields$decimalLongitude != "decimalLongitude") {
         if (new_fields$decimalLongitude %in% names(indf)) {
             if ("decimalLongitude" %in% names(indf)) {
                 names(indf)[names(indf)=="decimalLongitude"] <- "decimalLongitude::original"
@@ -114,7 +114,7 @@ format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
             if (!(quiet)) message(c("Changed \"",new_fields$decimalLongitude,"\" to \"decimalLongitude\""))
         }
     }
-    if (!(is.na(new_fields$countryCode)) && new_fields$countryCode != "countryCode") {
+    if (!(is.null(new_fields$countryCode)) && new_fields$countryCode != "countryCode") {
         if (new_fields$countryCode %in% names(indf)) {
             if ("countryCode" %in% names(indf)) {
                 names(indf)[names(indf)=="countryCode"] <- "countryCode::original"
@@ -124,7 +124,7 @@ format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
             if (!(quiet)) message(c("Changed \"",new_fields$countryCode,"\" to \"countryCode\""))
         }
     }
-    if (!(is.na(new_fields$scientificName)) && new_fields$scientificName != "scientificName") {
+    if (!(is.null(new_fields$scientificName)) && new_fields$scientificName != "scientificName") {
         if (new_fields$scientificName %in% names(indf)) {
             if ("scientificName" %in% names(indf)) {
                 names(indf)[names(indf)=="scientificName"] <- "scientificName::original"
@@ -161,7 +161,7 @@ gq_get_source <- function(source) {
         rinat=list(
             decimalLatitude="latitude",
             decimalLongitude="longitude",
-            countryCode=NA,
+            countryCode=NULL,
             scientificName="scientific_name"
         )
     )
@@ -181,22 +181,22 @@ gq_parse_args <- function(args) {
     if ("decimalLatitude" %in% names(args)) {
         gq_args$decimalLatitude=args$decimalLatitude
     } else {
-        gq_args$decimalLatitude=NA
+        gq_args$decimalLatitude=NULL
     }
     if ("decimalLongitude" %in% names(args)) {
         gq_args$decimalLongitude=args$decimalLongitude
     } else {
-        gq_args$decimalLongitude=NA
+        gq_args$decimalLongitude=NULL
     }
     if ("countryCode" %in% names(args)) {
         gq_args$countryCode=args$countryCode
     } else {
-        gq_args$countryCode=NA
+        gq_args$countryCode=NULL
     }
     if ("scientificName" %in% names(args)) {
         gq_args$scientificName=args$scientificName
     } else {
-        gq_args$scientificName=NA
+        gq_args$scientificName=NULL
     }
     return(gq_args)
 }
