@@ -4,7 +4,7 @@
 \alias{format_gq}
 \title{Prepare data frame for flagging functions}
 \usage{
-format_gq(indf = NA, source = NA, config = NA, quiet = FALSE, ...)
+format_gq(indf, source = NA, config = NA, quiet = FALSE, ...)
 }
 \arguments{
 \item{indf}{Required. The data.frame on which to operate.}

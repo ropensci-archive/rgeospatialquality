@@ -72,7 +72,7 @@
 #' @seealso \code{\link{add_flags}}
 #'
 #' @export
-format_gq <- function(indf=NA, source=NA, config=NA, quiet=FALSE, ...) {
+format_gq <- function(indf, source=NA, config=NA, quiet=FALSE, ...) {
 
     # Parse input object type
     gq_check_df(indf)
