@@ -39,12 +39,7 @@ test_that("add_flags works properly with a 1-row data.frame", {
     expect_equal(resp$flags$distanceToRangeMapInKm, 7261.647)
 })
 
-test_that("add_flags plays well with rgbif", {
-    if (requireNamespace("rgbif", quietly = TRUE)) {
-        d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
-        d <- format_gq(d$data, source="rgbif")
-        dd <- add_flags(d)
-        expect_equal(nrow(dd), 50)
-        expect_true("flags" %in% names(dd))
-    }
+test_that("add_flags fails when more than 1000 records are passed", {
+    test.data.frame <- data.frame(cbind(rep("x", times=1001), rep("y", times=1001), rep("z", 1001)))
+    expect_error(add_flags(test.data.frame, quiet=TRUE), "Too many records.")
 })

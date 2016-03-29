@@ -37,3 +37,18 @@ test_that("parse_record works properly", {
 
 })
 
+test_that("parse_record shows warning if any field is missing from record", {
+    rec <- list(
+        decimalLatitude=42.33,
+        decimalLongitude=-1.833,
+        countryCode="ES"
+    )
+    expect_warning(parse_record(record=rec), "element missing")
+})
+
+test_that("parse_record shows warning if any field is missing from the named parameters", {
+    expect_warning(
+        parse_record(decimalLatitude = 42.33, decimalLongitude = -1.833),
+        "element missing"
+    )
+})

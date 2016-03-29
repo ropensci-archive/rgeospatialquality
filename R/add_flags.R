@@ -39,7 +39,7 @@
 add_flags <- function(indf, show_summary=TRUE, quiet=FALSE, ...) {
 
     # Parse input
-    gq_parse_dataframe(indf)
+    gq_parse_dataframe(indf, quiet)
 
     # Prepare POST request
     req_body <- jsonlite::toJSON(indf)
@@ -60,16 +60,18 @@ add_flags <- function(indf, show_summary=TRUE, quiet=FALSE, ...) {
     indf
 }
 
-gq_parse_dataframe <- function(indf) {
+gq_parse_dataframe <- function(indf, quiet) {
 
     # Parse input object type
     gq_check_df(indf)
 
     # Parse input content completeness
-    if (!("decimalLatitude" %in% names(indf))) warning("'decimalLatitude' element missing")
-    if (!("decimalLongitude" %in% names(indf))) warning("'decimalLongitude' element missing")
-    if (!("countryCode" %in% names(indf))) warning("'countryCode' element missing")
-    if (!("scientificName" %in% names(indf))) warning("'scientificName' element missing")
+    if (!(quiet)) {
+        if (!("decimalLatitude" %in% names(indf))) warning("'decimalLatitude' element missing")
+        if (!("decimalLongitude" %in% names(indf))) warning("'decimalLongitude' element missing")
+        if (!("countryCode" %in% names(indf))) warning("'countryCode' element missing")
+        if (!("scientificName" %in% names(indf))) warning("'scientificName' element missing")
+    }
 
     if(nrow(indf)>1000) stop("Too many records. The API has a hard-limit of 1000 records per request")
 

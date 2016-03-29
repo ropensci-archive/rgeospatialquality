@@ -29,8 +29,23 @@ the species (string, e.g. "Puma concolor")}
 A named list with the geospatial quality flags
 }
 \description{
-\code{parse_record} calls the \code{GET} method of the API in order to extract
-the flags for an individual record. It returns just the \code{flags} element
+\code{parse_record} calls the \code{GET} method of the API in order to
+extract the flags for an individual record. It returns just the \code{flags}
+element.
+}
+\details{
+Data can be passed in two different ways to this function: either with the
+four key elements (\code{decimalLatitude}, \code{decimalLongitude},
+\code{countryCode} and \code{scientificName}) passed as named arguments or
+via a single \code{record} parameter that consists of a list with these four
+elements. However, if both are filled, the function will stop and show an
+error message. The more filled fields, the more informative the output of the
+API will be. However, due to the flexible nature of the underlying API, a
+valid response will be get even if no input data is provided. Therefore,
+calling \code{parse_record()} with no arguments will return a list of three
+\code{FALSE} elements, which represents no information at all. The function
+will however throw a warning for each missing field. See \code{\link{flags}}
+for more info on the input and output of the function.
 }
 \examples{
 rec <- list(decimalLatitude=42.1833, decimalLongitude=-1.8332,

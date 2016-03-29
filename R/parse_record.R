@@ -1,7 +1,21 @@
 #' Calculate flags for a single record
 #'
-#' \code{parse_record} calls the \code{GET} method of the API in order to extract
-#' the flags for an individual record. It returns just the \code{flags} element
+#' \code{parse_record} calls the \code{GET} method of the API in order to
+#' extract the flags for an individual record. It returns just the \code{flags}
+#' element.
+#'
+#' Data can be passed in two different ways to this function: either with the
+#' four key elements (\code{decimalLatitude}, \code{decimalLongitude},
+#' \code{countryCode} and \code{scientificName}) passed as named arguments or
+#' via a single \code{record} parameter that consists of a list with these four
+#' elements. However, if both are filled, the function will stop and show an
+#' error message. The more filled fields, the more informative the output of the
+#' API will be. However, due to the flexible nature of the underlying API, a
+#' valid response will be get even if no input data is provided. Therefore,
+#' calling \code{parse_record()} with no arguments will return a list of three
+#' \code{FALSE} elements, which represents no information at all. The function
+#' will however throw a warning for each missing field. See \code{\link{flags}}
+#' for more info on the input and output of the function.
 #'
 #' @param record List-type object containing information on the record. If
 #'   present, it MUST contain the following four attributes as named elements.
@@ -44,8 +58,15 @@ parse_record <- function(record=NULL, decimalLatitude=NULL, decimalLongitude=NUL
             countryCode=countryCode,
             scientificName=scientificName
         )
-        params <- plyr::compact(params)
     }
+
+    # Remove NULLs
+    params <- plyr::compact(params)
+    if (!("decimalLatitude" %in% names(params))) warning("'decimalLatitude' element missing")
+    if (!("decimalLongitude" %in% names(params))) warning("'decimalLongitude' element missing")
+    if (!("countryCode" %in% names(params))) warning("'countryCode' element missing")
+    if (!("scientificName" %in% names(params))) warning("'scientificName' element missing")
+
     # Make GET request
     req <- httr::GET(BASE_URL, query=params, ...)
 
@@ -62,16 +83,16 @@ gq_parse_record <- function(record) {
     params <- list()
 
     # Check that all four elements are present
-    if(!'decimalLatitude' %in% names(record)) params$decimalLatitude <- "" else params$decimalLatitude <- record$decimalLatitude
-    if(!'decimalLongitude' %in% names(record)) params$decimalLongitude <- "" else params$decimalLongitude <- record$decimalLongitude
-    if(!'countryCode' %in% names(record)) params$countryCode <- "" else params$countryCode <- record$countryCode
+    if(!'decimalLatitude' %in% names(record)) params$decimalLatitude <- NULL else params$decimalLatitude <- record$decimalLatitude
+    if(!'decimalLongitude' %in% names(record)) params$decimalLongitude <- NULL else params$decimalLongitude <- record$decimalLongitude
+    if(!'countryCode' %in% names(record)) params$countryCode <- NULL else params$countryCode <- record$countryCode
 
     if('scientificName' %in% names(record)) {
         params$scientificName <- record$scientificName
     } else if('name' %in% names(record)) {
         params$scientificName <- record$name
     } else {
-        params$scientificName <- ""
+        params$scientificName <- NULL
     }
 
     params
