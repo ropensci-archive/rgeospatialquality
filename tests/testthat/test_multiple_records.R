@@ -42,7 +42,7 @@ test_that("add_flags works properly with a 1-row data.frame", {
 test_that("add_flags plays well with rgbif", {
     if (requireNamespace("rgbif", quietly = TRUE)) {
         d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
-        d <- format_gq(d$data, soure="rgbif")
+        d <- format_gq(d$data, source="rgbif")
         dd <- add_flags(d)
         expect_equal(nrow(dd), 50)
         expect_true("flags" %in% names(dd))

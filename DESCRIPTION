@@ -20,7 +20,9 @@ Suggests: knitr,
     rmarkdown,
     testthat,
     covr,
-    rgbif (>= 0.9.2)
+    rgbif (>= 0.9.2),
+    rvertnet,
+    rinat
 VignetteBuilder: knitr
 URL: https://github.com/jotegui/rgeospatialquality
 BugReports: https://github.com/jotegui/rgeospatialquality/issues
