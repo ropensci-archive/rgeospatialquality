@@ -1,6 +1,6 @@
 context("Single record")
 
-test_that("flags works with a list object, called 'record'", {
+test_that("parse_record works with a list object, called 'record'", {
     rec <- list(
         "decimalLatitude"=-42.1833,
         "decimalLongitude"=-1.8332,
@@ -14,7 +14,16 @@ test_that("flags works with a list object, called 'record'", {
     expect_equal(resp$distanceToRangeMapInKm, 5114.433)
 })
 
-test_that("flags works properly", {
+test_that("parse_record does not work if both 'record' and other named parameters are present", {
+    rec <- list(
+        decimalLatitude=42.33,
+        decimalLongitude=-1.833,
+        countryCode="ES"
+    )
+    expect_error(parse_record(record=rec, decimalLatitude = 4), "Both \"record\" and other named parameters are provided")
+})
+
+test_that("parse_record works properly", {
     lat <- -42.1833
     lng <- -1.8332
     ccd <- "ES"
