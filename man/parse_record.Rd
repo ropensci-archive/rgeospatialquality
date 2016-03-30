@@ -48,15 +48,29 @@ will however throw a warning for each missing field. See \code{\link{flags}}
 for more info on the input and output of the function.
 }
 \examples{
+\dontrun{
+# Using the 'record' parameter
+# Create 'record' object with values
 rec <- list(decimalLatitude=42.1833, decimalLongitude=-1.8332,
             countryCode="ES", scientificName="Puma concolor")
+# Call the API and get the results
 parse_record(record=rec)
 
-# OR
-
+# Using named arguments
 parse_record(decimalLatitude=42.1833, decimalLongitude=-1.8332,
            countryCode="ES", scientificName="Puma concolor")
+# In both cases, the result will be the same
 
+# If any parameter is missing, the function runs, but throws a warning
+# message. This will throw a warning saying that 'countryCode' and
+# 'scientificName' fields are missing. Also, the results will be
+# limited to the feasible calculations.
+parse_record(decimalLatitude=42.1833, decimalLongitude=-1.8332)
+
+# One can call the function without parameters. Although valid,
+# this way of calling the function is useless.
+parse_record()
+}
 }
 \seealso{
 \code{\link{flags}}, \code{\link{add_flags}}

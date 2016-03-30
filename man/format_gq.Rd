@@ -64,13 +64,14 @@ mapping by passing the individual column names associated with the right term
 of the DarwinCore Standard. See the examples section.
 }
 \examples{
+\dontrun{
 # Using the rgbif package and the source argument
 if (requireNamespace("rgbif", quietly=TRUE)) {
  d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
  d <- d$data
  d <- format_gq(d, source="rgbif")
 
- # Using a configuration object, matches 'rinat' schema
+ # Using a configuration object (matches 'rinat' schema)
  conf <- list(decimalLatitude="latitude",
               decimalLongitude="longitude",
               countryCode=NULL,
@@ -83,6 +84,7 @@ if (requireNamespace("rgbif", quietly=TRUE)) {
                 decimalLongitude="lng",
                 countryCode="ccode",
                 scientificName="sciname")
+}
 }
 }
 \seealso{

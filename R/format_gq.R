@@ -49,14 +49,14 @@
 #' @return The provided data frame, with field names changed to fit the API
 #'   functioning.
 #'
-#' @examples
+#' @examples \dontrun{
 #' # Using the rgbif package and the source argument
 #' if (requireNamespace("rgbif", quietly=TRUE)) {
 #'  d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
 #'  d <- d$data
 #'  d <- format_gq(d, source="rgbif")
 #'
-#'  # Using a configuration object, matches 'rinat' schema
+#'  # Using a configuration object (matches 'rinat' schema)
 #'  conf <- list(decimalLatitude="latitude",
 #'               decimalLongitude="longitude",
 #'               countryCode=NULL,
@@ -69,6 +69,7 @@
 #'                 decimalLongitude="lng",
 #'                 countryCode="ccode",
 #'                 scientificName="sciname")
+#' }
 #' }
 #' @seealso \code{\link{add_flags}}
 #'

@@ -31,17 +31,37 @@ results, indicating how many records showed different types of issues.
 request, to avoid malfunctioning due to some third-party library limtations.
 }
 \examples{
-# Using the rgbif package, prepare data
+\dontrun{
+# Using the rgbif package
 if (requireNamespace("rgbif", quietly=TRUE)) {
  library("rgbif")
+
+ # Prepare data
  d <- occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
  d <- d$data
 
  # Format data.frame
  d <- format_gq(d, source="rgbif")
 
- # Execute the call to the API and store the results
+ # Execute the call to the API, showing output and
+ # logging information, and store the results
  dd <- add_flags(d)
+
+ # Execute the call without showing summary output, but
+ # showing logging information
+ dd <- add_flags(d, show_summary=FALSE)
+
+ # Execute the call without showing any logging at all
+ # (except errors, obviously)
+ dd <- add_flags(d, quiet=TRUE)
+
+ # Data quality output will be stored in a new field called flags
+ names(dd$flags)
+
+ # You can check records with certain flags as usual
+ # See records with coordinates-country mismatch
+ dd[dd$flags$coordinatesInsideCountry == FALSE,]
+}
 }
 
 }
