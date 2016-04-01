@@ -4,11 +4,18 @@
 \alias{add_flags}
 \title{Calculate flags for a set of records and add them to the provided data frame}
 \usage{
-add_flags(indf, show_summary = TRUE, quiet = FALSE, ...)
+add_flags(indf, guess_fields = FALSE, show_summary = TRUE, quiet = FALSE,
+  ...)
 }
 \arguments{
 \item{indf}{Required. Properly formatted data frame containing a row per
 record}
+
+\item{guess_fields}{Optional. Try or not to guess key fields if names don't
+follow the DarwinCore standard (see details). Defaults to FALSE, meaning it
+won't try to guess field names and will throw warnings for each missing
+field. Set to TRUE to try to guess field names (this will make the function
+stop if no match can be found for any of the key fields)}
 
 \item{show_summary}{Optional. Show a summary of the quality flags after the
 process has finished. Defaults to TRUE}
@@ -23,12 +30,29 @@ The provided data frame with the quality flags added as new columns
 }
 \description{
 \code{add_flags} calls the \code{POST} method of the API in order to extract
-the flags for a set of records. After finishing, the function returns the
-provided data.frame with a new column, \code{flags}, which holds for each
-record a list of the geospatial quality flags. It also shows a summary of the
-results, indicating how many records showed different types of issues.
-\strong{NOTE:} currently, the API imposes a hard-limit of 1000 records per
-request, to avoid malfunctioning due to some third-party library limtations.
+the flags for a set of records. \strong{NOTE:} currently, the API imposes a
+hard-limit of 1000 records per request, to avoid malfunctioning due to some
+third-party library limtations. This function will not work if a
+\code{data.frame} with more than 1000 rows is provided.
+}
+\details{
+Internally, the function takes the provided \code{data.frame}, transforms it
+to JSON and makes a \code{POST} request to the underlying API with the JSON
+object in the body of the request. In order to work properly and give
+comprehensive results, the \code{data.frame} should have the four key fields
+this API works with. See \code{\link{flags}} for details. If a field is
+missing, the function will show a warning. If the name of the fields in your
+\code{data.frame} don't conform to the DarwinCore standard, \code{add_flags}
+can try to map the names in the \code{data.frame} to the standard ones if the
+parameter \code{guess_fields} is set to \code{TRUE}. In this case, if there
+is no match, the function will stop and give instructions on how to resume.
+If there is, the original name in the \code{data.frame} will not change.
+
+After finishing, the function returns the provided \code{data.frame} with a
+new column, \code{flags}, which holds for each record a list of the
+geospatial quality flags. If \code{show_summary} is \code{TRUE} (default
+value), it also shows a summary of the results, indicating how many records
+showed different types of issues.
 }
 \examples{
 \dontrun{
@@ -46,6 +70,10 @@ if (requireNamespace("rgbif", quietly=TRUE)) {
  # Execute the call to the API, showing output and
  # logging information, and store the results
  dd <- add_flags(d)
+
+ # Alternatively, instead of formating with 'format_gq', make the function
+ # guess the correct name of the fields.
+ dd <- add_flags(d, guess_fields=TRUE)
 
  # Execute the call without showing summary output, but
  # showing logging information

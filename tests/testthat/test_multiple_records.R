@@ -20,6 +20,25 @@ test_that("add_flags shows warning messages with incomplete inputs", {
     expect_warning(add_flags(df), "'decimalLatitude' element missing")
 })
 
+test_that("add_flags works properly guessing names for rvertnet dataset", {
+    if (requireNamespace("rvertnet", quietly = TRUE)) {
+        dv <- rvertnet::searchbyterm(class="Aves", limit=20)
+        dv <- dv$data
+        dv <- add_flags(dv, guess_fields=TRUE, quiet=TRUE)
+        # Name is not changed
+        expect_false("decimalLatitude" %in% names(dv))
+        # Name is kept
+        expect_true("decimallatitude" %in% names(dv))
+        # 'flags' element is present
+        expect_true("flags" %in% names(dv))
+    }
+})
+
+test_that("add_flags stops when a field is missing and guess_fields is TRUE", {
+    test.data.frame <- data.frame(cbind(rep("x", times=10), rep("y", times=10), rep("z", 10)))
+    expect_error(add_flags(test.data.frame, guess_fields=TRUE), "Could not find a match for decimalLatitude")
+})
+
 test_that("add_flags works properly with a 1-row data.frame", {
     df <- data.frame(42.3881, 3.833, "ES", "Puma concolor")
     names(df) <- c("decimalLatitude", "decimalLongitude", "countryCode", "scientificName")
