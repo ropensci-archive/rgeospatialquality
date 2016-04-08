@@ -15,7 +15,7 @@ The [Geospatial Quality API](https://www.github.com/vertnet/api-geospatial) (GQ 
 
 In this document, I will show how this package can be used together with ROpenSci's `rgbif` to easily apply quality assessment functions to data downloaded through its methods.
 
-```{r loading, echo=FALSE}
+```{r loading}
 library(rgeospatialquality)
 ```
 
@@ -31,14 +31,13 @@ This is a perfect function to show how to build synergies between both packages.
 First, we need to download some records from GBIF with `occ_data`:
 
 ```{r rgbif_extraction}
-if(requireNamespace("rgbif", quietly = TRUE)){
-    library("rgbif")
-    d <- occ_data(
-        scientificName="Apis mellifera",
-        limit=50,
-        minimal=FALSE
-    )
-}
+library(rgbif)
+
+d <- occ_data(
+    scientificName="Apis mellifera",
+    limit=50,
+    minimal=FALSE
+)
 ```
 
 We will extract just 50 records for the bee species *Apis mellifera*. The default value for limit is 500, but for the purpose of this example, we will stick to a smaller amount of records. `minimal=FALSE` allows us to get the full set of fields for each record and not only the three "basic" ones (see `occ_data` documentation for more info).
@@ -46,10 +45,8 @@ We will extract just 50 records for the bee species *Apis mellifera*. The defaul
 This method returns a list with 2 elements, `meta` and `data`. We will operate with the records themselves, which can be found in the `data` element
 
 ```{r rgbif_parsing}
-if(requireNamespace("rgbif", quietly = TRUE)){
-    d <- d$data
-    str(d)
-}
+d <- d$data
+str(d)
 ```
 
 ## Data structure
@@ -65,12 +62,10 @@ Both GBIF and the GQ API use [Darwin Core](http://rs.tdwg.org/dwc/terms/index.ht
 The data frame we obtained in the previuos step is already formatted according to the DwC standard:
 
 ```{r rgbif_format}
-if(requireNamespace("rgbif", quietly = TRUE)){
-    "decimalLatitude" %in% names(d)
-    "decimalLongitude" %in% names(d)
-    "countryCode" %in% names(d)
-    "scientificName" %in% names(d)
-}
+"decimalLatitude" %in% names(d)
+"decimalLongitude" %in% names(d)
+"countryCode" %in% names(d)
+"scientificName" %in% names(d)
 ```
 
 Therefore, we don't need any further transformation of the data frame, and we can proceed to assess the geospatial quality of the records.
@@ -82,11 +77,9 @@ We will use the `add_flags` function to assess the quality of a set of more than
 Internally, the function transforms the content of the supplied `data.frame` to JSON and performs the `POST` request. Then, translates the results back from `JSON` to a new `data.frame`. The resulting object has the same structure as the provided one, with the addition of a `list`-type new element called `flags`. Inside that element, there are several sub-fields, each one with the result of a particular check. Please see the [GQ API documentation](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md) for more information on the functioning of the API.
 
 ```{r api_call}
-if(requireNamespace("rgbif", quietly = TRUE)){
-    dd <- add_flags(d)
-    str(dd)
-    dd[1,]$flags  # Flags for the first record
-}
+dd <- add_flags(d)
+str(dd)
+dd[1,]$flags  # Flags for the first record
 ```
 
 
