@@ -1,13 +1,5 @@
 context("Data frame formating")
 
-test_that("format_gq only accepts data.frames", {
-    expect_error(format_gq(list()), "Only data.frame objects are currently accepted")
-    expect_error(format_gq(1), "Only data.frame objects are currently accepted")
-    expect_error(format_gq("a"), "Only data.frame objects are currently accepted")
-    expect_error(format_gq(c()), "Only data.frame objects are currently accepted")
-    expect_error(format_gq(data.frame()), "Input data frame missing or empty")
-})
-
 test_that("Formating via 'source' works", {
     if (requireNamespace("rgbif", quietly = TRUE)) {
         dg <- rgbif::occ_data(scientificName="Apis mellifera", limit=10, minimal=FALSE)

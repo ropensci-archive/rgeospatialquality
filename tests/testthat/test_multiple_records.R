@@ -1,11 +1,11 @@
 context("Multiple records")
 
-test_that("add_flags only accepts data.frames", {
-    expect_error(add_flags(list()), "Only data.frame objects are currently accepted")
-    expect_error(add_flags(1), "Only data.frame objects are currently accepted")
-    expect_error(add_flags("a"), "Only data.frame objects are currently accepted")
-    expect_error(add_flags(c()), "Only data.frame objects are currently accepted")
-    expect_error(add_flags(data.frame()), "Input data frame missing or empty")
+test_that("add_flags halts with wrong input", {
+    expect_error(add_flags())
+    expect_error(add_flags(data.frame()))
+    expect_error(add_flags("a"))
+    expect_error(add_flags(1))
+    expect_error(add_flags(c("a", "b", "c")))
 })
 
 test_that("add_flags shows warning messages with incomplete inputs", {

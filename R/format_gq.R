@@ -75,14 +75,8 @@
 #'
 #' @export
 format_gq <- function(indf, source=NULL, config=NULL, quiet=FALSE, ...) {
-    UseMethod("format_gq", indf)
-}
-format_gq.default <- function(indf, ...) {
-    stop("Only data.frame objects are currently accepted", call. = FALSE)
-}
-format_gq.data.frame <- function(indf, source=NULL, config=NULL, quiet=FALSE, ...) {
 
-    # Parse input
+    # Parse input object type
     gq_check_df(indf)
 
     # Mapping via 'source'
