@@ -15,7 +15,7 @@ The [Geospatial Quality API](https://www.github.com/vertnet/api-geospatial) (GQ 
 
 In this document, I will show how this package can be used together with ROpenSci's `rgbif` to easily apply quality assessment functions to data downloaded through its methods.
 
-```{r loading, echo=FALSE}
+```{r loading}
 library(rgeospatialquality)
 ```
 

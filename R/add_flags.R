@@ -81,7 +81,12 @@
 #'
 #' @export
 add_flags <- function(indf, guess_fields=FALSE, show_summary=TRUE, quiet=FALSE, ...) {
-
+    UseMethod("add_flags", indf)
+}
+add_flags.default <- function(indf, guess_fields=FALSE, show_summary=TRUE, quiet=FALSE, ...) {
+    stop("Only data.frame objects are currently accepted", call. = FALSE)
+}
+add_flags.data.frame <- function(indf, guess_fields=FALSE, show_summary=TRUE, quiet=FALSE, ...) {
     # Parse input
     indf2 <- gq_parse_dataframe(indf, guess_fields, quiet)
 
@@ -116,7 +121,7 @@ gq_replace_field <- function(indf, orig, dwc, quiet) {
 
 gq_parse_dataframe <- function(indf, guess_fields=FALSE, quiet=FALSE) {
 
-    # Parse input object type
+    # Parse input
     gq_check_df(indf)
 
     # Stop if too manu records.
