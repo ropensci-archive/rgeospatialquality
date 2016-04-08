@@ -5,7 +5,7 @@ rgeospatialquality
 
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
-Latest version is *0.3.0*
+Latest version is *0.2.2*
 
 Installation
 ------------
@@ -110,7 +110,7 @@ Meta
 ----
 
 -   Please [report any issues or bugs](https://github.com/jotegui/rgeospatialquality/issues).
--   License: MIT
+-   License: GPL-3
 -   Get citation information doing `citation(package = 'rgeospatialquality')`
 -   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
