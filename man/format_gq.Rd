@@ -2,9 +2,17 @@
 % Please edit documentation in R/format_gq.R
 \name{format_gq}
 \alias{format_gq}
+\alias{format_gq.data.frame}
+\alias{format_gq.default}
 \title{Prepare data frame for flagging functions}
 \usage{
 format_gq(indf, source = NULL, config = NULL, quiet = FALSE, ...)
+
+\method{format_gq}{default}(indf, source = NULL, config = NULL,
+  quiet = FALSE, ...)
+
+\method{format_gq}{data.frame}(indf, source = NULL, config = NULL,
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{indf}{Required. The data.frame on which to operate.}

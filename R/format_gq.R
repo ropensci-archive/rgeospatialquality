@@ -78,10 +78,14 @@ format_gq <- function(indf, source=NULL, config=NULL, quiet=FALSE, ...) {
     UseMethod("format_gq", indf)
 }
 
+#' @export
+#' @rdname format_gq
 format_gq.default <- function(indf, source=NULL, config=NULL, quiet=FALSE, ...) {
     stop("Please provide a data.frame object as input", call. = FALSE)
 }
 
+#' @export
+#' @rdname format_gq
 format_gq.data.frame <- function(indf, source=NULL, config=NULL, quiet=FALSE, ...) {
 
     # Parse input object type

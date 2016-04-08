@@ -2,6 +2,8 @@
 
 S3method(add_flags,data.frame)
 S3method(add_flags,default)
+S3method(format_gq,data.frame)
+S3method(format_gq,default)
 export(add_flags)
 export(format_gq)
 export(parse_record)
