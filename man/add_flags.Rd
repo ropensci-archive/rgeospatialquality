@@ -2,10 +2,18 @@
 % Please edit documentation in R/add_flags.R
 \name{add_flags}
 \alias{add_flags}
+\alias{add_flags.data.frame}
+\alias{add_flags.default}
 \title{Calculate flags for a set of records and add them to the provided data frame}
 \usage{
 add_flags(indf, guess_fields = FALSE, show_summary = TRUE, quiet = FALSE,
   ...)
+
+\method{add_flags}{default}(indf, guess_fields = FALSE, show_summary = TRUE,
+  quiet = FALSE, ...)
+
+\method{add_flags}{data.frame}(indf, guess_fields = FALSE,
+  show_summary = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{indf}{Required. Properly formatted data frame containing a row per

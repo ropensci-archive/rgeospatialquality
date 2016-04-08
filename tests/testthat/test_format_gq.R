@@ -1,5 +1,18 @@
 context("Data frame formating")
 
+test_that("format_gq only works with data.frames", {
+    err_msg <- "Please provide a data.frame object as input"
+    expect_error(format_gq(), "argument \"indf\" is missing, with no default")
+    expect_error(format_gq("a"), err_msg)
+    expect_error(format_gq(1), err_msg)
+    expect_error(format_gq(c("a", "b", "c")), err_msg)
+    expect_error(format_gq(list()), err_msg)
+})
+
+test_that("format_gq needs populated data.frames", {
+    expect_error(format_gq(data.frame()), "Input data frame missing or empty")
+})
+
 test_that("Formating via 'source' works", {
     if (requireNamespace("rgbif", quietly = TRUE)) {
         dg <- rgbif::occ_data(scientificName="Apis mellifera", limit=10, minimal=FALSE)

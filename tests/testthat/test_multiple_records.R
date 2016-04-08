@@ -1,11 +1,16 @@
 context("Multiple records")
 
-test_that("add_flags halts with wrong input", {
-    expect_error(add_flags())
-    expect_error(add_flags(data.frame()))
-    expect_error(add_flags("a"))
-    expect_error(add_flags(1))
-    expect_error(add_flags(c("a", "b", "c")))
+test_that("add_flags only works with data.frames", {
+    err_msg <- "Please provide a data.frame object as input"
+    expect_error(add_flags(), "argument \"indf\" is missing, with no default")
+    expect_error(add_flags("a"), err_msg)
+    expect_error(add_flags(1), err_msg)
+    expect_error(add_flags(c("a", "b", "c")), err_msg)
+    expect_error(add_flags(list()), err_msg)
+})
+
+test_that("add_flags needs populated data.frames", {
+    expect_error(add_flags(data.frame()), "Input data frame missing or empty")
 })
 
 test_that("add_flags shows warning messages with incomplete inputs", {

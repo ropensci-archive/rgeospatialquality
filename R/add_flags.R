@@ -81,6 +81,18 @@
 #'
 #' @export
 add_flags <- function(indf, guess_fields=FALSE, show_summary=TRUE, quiet=FALSE, ...) {
+    UseMethod("add_flags", indf)
+}
+
+#' @export
+#' @rdname add_flags
+add_flags.default <- function(indf, guess_fields=FALSE, show_summary=TRUE, quiet=FALSE, ...) {
+    stop("Please provide a data.frame object as input", call. = FALSE)
+}
+
+#' @export
+#' @rdname add_flags
+add_flags.data.frame <- function(indf, guess_fields=FALSE, show_summary=TRUE, quiet=FALSE, ...) {
 
     # Parse input
     indf2 <- gq_parse_dataframe(indf, guess_fields, quiet)
