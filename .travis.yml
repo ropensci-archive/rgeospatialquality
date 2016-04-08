@@ -1,8 +1,16 @@
 # Sample .travis.yml for R projects
 
 language: r
+cache: packages
 warnings_are_errors: true
 sudo: false
+repos:
+  CRAN: https://cloud.r-project.org
+  ropensci: http://packages.ropensci.org
+r_github_packages:
+  - ropensci/rgbif
+  - ropensci/rvertnet
+  - ropensci/rinat
 addons:
   apt:
     packages:
