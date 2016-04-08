@@ -1,7 +1,7 @@
 Package: rgeospatialquality
 Type: Package
 Title: Wrapper for the Geospatial Data Quality REST API
-Version: 0.2.2
+Version: 0.3.0
 Date: 2016-02-22
 Authors@R: person("Javier", "Otegui", email="javier.otegui@gmail.com",
     role=c("aut", "cre"))
