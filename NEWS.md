@@ -1,3 +1,16 @@
+rgeospatialquality 0.3.1
+========================
+
+### IMPROVEMENTS
+
+* Implemented `add_flags` and `format_gq` as S3 methods
+* Improved tests for this new implementation
+* On `.travis.yml`, added option to cache packages so builds are faster
+
+### BUG FIXES
+
+* Fixed issue with Travis not being able to install `rgbif`, `rinat` and `rvertnet`
+
 rgeospatialquality 0.3.0
 ========================
 
