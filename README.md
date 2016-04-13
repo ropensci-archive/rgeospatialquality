@@ -1,7 +1,7 @@
 rgeospatialquality
 ==================
 
-[![Travis-CI Build Status](https://travis-ci.org/jotegui/rgeospatialquality.svg?branch=master)](https://travis-ci.org/jotegui/rgeospatialquality) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jotegui/rgeospatialquality?branch=master&svg=true)](https://ci.appveyor.com/project/jotegui/rgeospatialquality) [![codecov.io](https://codecov.io/github/jotegui/rgeospatialquality/coverage.svg?branch=master)](https://codecov.io/github/jotegui/rgeospatialquality?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/rgeospatialquality.svg?branch=master)](https://travis-ci.org/ropenscilabs/rgeospatialquality) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropenscilabs/rgeospatialquality?branch=master&svg=true)](https://ci.appveyor.com/project/ropenscilabs/rgeospatialquality) [![codecov.io](https://codecov.io/github/ropenscilabs/rgeospatialquality/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/rgeospatialquality?branch=master)
 
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
@@ -14,7 +14,7 @@ Although we have plans to make this package available via CRAN, currently the on
 
 ``` r
 install.packages("devtools")
-devtools::install_github("jotegui/rgeospatialquality")
+devtools::install_github("ropenscilabs/rgeospatialquality")
 ```
 
 `rgeospatialquality` depends on two packages:
@@ -109,7 +109,7 @@ One easy way to directly get occurrences with the right format is to use the `oc
 Meta
 ----
 
--   Please [report any issues or bugs](https://github.com/jotegui/rgeospatialquality/issues).
+-   Please [report any issues or bugs](https://github.com/ropenscilabs/rgeospatialquality/issues).
 -   License: MIT
 -   Get citation information doing `citation(package = 'rgeospatialquality')`
 -   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
