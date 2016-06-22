@@ -23,8 +23,14 @@ test_that("Formating via 'source' works", {
         expect_message(format_gq(dv$data, source="rvertnet"), "Mapping according to rvertnet format")
     }
     if (requireNamespace("rinat", quietly = TRUE)) {
-        di <- rinat::get_inat_obs(query="Monarch Butterfly", maxresults = 20)
-        expect_message(format_gq(di, source="rinat"), "Mapping according to rinat format")
+        tryCatch({
+            di <- rinat::get_inat_obs(query="Monarch Butterfly", maxresults = 20)
+        }, error = function(e){
+            warning("Could not get data from rinat.")
+        })
+        if (exists("di")) {
+            expect_message(format_gq(di, source="rinat"), "Mapping according to rinat format")
+        }
     }
 })
 
