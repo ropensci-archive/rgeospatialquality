@@ -1,7 +1,7 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Modified the `description` section of the `DESCRIPTION` file as suggested (removed the initial "This package...")
+* Modified the `description` section of the `DESCRIPTION` file as suggested (last sentence rewritten)
 
 ## Test environments
 * local Linux Mint 17.3 64 bit install, R 3.3.1

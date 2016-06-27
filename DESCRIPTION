@@ -6,8 +6,8 @@ Date: 2016-06-27
 Authors@R: person("Javier", "Otegui", email="javier.otegui@gmail.com",
     role=c("aut", "cre"))
 Description: Provides native wrappers for the functions available
-    via the spatial quality REST API. More information on the API can be found
-    here: http://bit.ly/bioinformatics_btw057.
+    via the spatial quality REST API. See <http://bit.ly/bioinformatics_btw057>
+    for more information on the API.
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
