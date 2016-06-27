@@ -108,6 +108,11 @@ add_flags.data.frame <- function(indf, guess_fields=FALSE, show_summary=TRUE, qu
     # Prepare response
     if (!(quiet)) message("Parsing output... ", appendLF = FALSE)
     resp <- gq_parse(req)
+
+    # Check for errors
+    if(is.null(req)) return()
+
+    # If not, continue
     if("flags" %in% names(resp)) indf$flags <- resp$flags
     if (!(quiet)) message("done.")
 

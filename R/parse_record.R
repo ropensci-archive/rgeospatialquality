@@ -85,6 +85,10 @@ parse_record <- function(record=NULL, decimalLatitude=NULL, decimalLongitude=NUL
 
     # Parse and return response
     resp <- gq_parse(req)
+
+    # Check for errors
+    if(is.null(req)) return()
+
     resp <- resp$flags
     resp
 }

@@ -1,3 +1,14 @@
+rgeospatialquality 0.3.2
+========================
+
+### BUG FIXES
+
+* Fixed function break when API returns 500 error
+
+### IMPROVEMENTS
+
+* Listed `plyr` dependency in README
+
 rgeospatialquality 0.3.1
 ========================
 

@@ -16,7 +16,7 @@ rgeospatialquality
 
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
-Latest version is *0.3.1*
+Latest version is *0.3.2*
 
 ## Installation
 
@@ -27,10 +27,11 @@ install.packages("devtools")
 devtools::install_github("ropenscilabs/rgeospatialquality")
 ```
 
-`rgeospatialquality` depends on two packages:
+`rgeospatialquality` depends on three packages:
 
 1. `httr` to perform the `GET` and `POST` requests to the API URL
 2. `jsonlite` to transform input data to JSON and to parse JSON responses to R native formats (`list` and `data.frame`)
+3. `plyr` to make some dataset transformation operations
 
 Also, it suggests the installation of ROpenSci's `rgbif` ([https://github.com/ropensci/rgbif](https://github.com/ropensci/rgbif)), for executing examples.
 
