@@ -13,6 +13,7 @@ rgeospatialquality
 [![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/rgeospatialquality.svg?branch=master)](https://travis-ci.org/ropenscilabs/rgeospatialquality)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/c1h4vnaabh6ml19e/branch/master?svg=true)](https://ci.appveyor.com/project/jotegui/rgeospatialquality-ctpju/branch/master)
 [![codecov.io](https://codecov.io/github/ropenscilabs/rgeospatialquality/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/rgeospatialquality?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rgeospatialquality)](http://cran.r-project.org/package=rgeospatialquality)
 
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
@@ -20,7 +21,9 @@ Latest version is *0.3.2*
 
 ## Installation
 
-Although we have plans to make this package available via CRAN, currently the only way to install it is via the `install_github` command, from `devtools` package. **Important note**: Windows users will need to install [Rtools](http://cran.r-project.org/bin/windows/Rtools/) first.
+The release version of the package is available from CRAN. You can install it with `install.packages("rgeospatialquality")`.
+
+Users can also install any version (including development versions) via the `install_github` command, from `devtools` package. **Important note**: Windows users will need to install [Rtools](http://cran.r-project.org/bin/windows/Rtools/) first.
 
 ```{r installation, eval=FALSE}
 install.packages("devtools")
