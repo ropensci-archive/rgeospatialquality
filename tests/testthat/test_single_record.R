@@ -9,9 +9,11 @@ test_that("parse_record works with a list object, called 'record'", {
     )
     resp <- parse_record(rec)
 
-    expect_true(resp$negatedLatitude)
-    expect_false(resp$coordinatesInsideCountry)
-    expect_equal(resp$distanceToRangeMapInKm, 5114.433)
+    if (is.null(resp) == FALSE) {
+        expect_true(resp$negatedLatitude)
+        expect_false(resp$coordinatesInsideCountry)
+        expect_equal(resp$distanceToRangeMapInKm, 5114.433)
+    }
 })
 
 test_that("parse_record does not work if both 'record' and other named parameters are present", {
@@ -31,9 +33,11 @@ test_that("parse_record works properly", {
     resp <- parse_record(decimalLatitude = lat, decimalLongitude = lng, countryCode = ccd, scientificName = scn)
 
     # Check that some critical flags are right
-    expect_true(resp$negatedLatitude)
-    expect_false(resp$coordinatesInsideCountry)
-    expect_equal(resp$distanceToRangeMapInKm, 5114.433)
+    if (is.null(resp) == FALSE){
+        expect_true(resp$negatedLatitude)
+        expect_false(resp$coordinatesInsideCountry)
+        expect_equal(resp$distanceToRangeMapInKm, 5114.433)
+    }
 
 })
 

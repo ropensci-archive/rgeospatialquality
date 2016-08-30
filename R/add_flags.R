@@ -97,6 +97,10 @@ add_flags.data.frame <- function(indf, guess_fields=FALSE, show_summary=TRUE, qu
     # Parse input
     indf2 <- gq_parse_dataframe(indf, guess_fields, quiet)
 
+    # Skip taxonomic check when there are problems with MOL
+    # Comment if unnecessary
+    #indf2 <- gq_skip_taxonomic(indf2)
+
     # Prepare POST request
     req_body <- jsonlite::toJSON(indf2)
 
@@ -110,7 +114,7 @@ add_flags.data.frame <- function(indf, guess_fields=FALSE, show_summary=TRUE, qu
     resp <- gq_parse(req)
 
     # Check for errors
-    if(is.null(req)) return()
+    if(is.null(resp)) return()
 
     # If not, continue
     if("flags" %in% names(resp)) indf$flags <- resp$flags
@@ -233,4 +237,11 @@ gq_show_summary <- function(flags) {
         }
     }
 
+}
+
+gq_skip_taxonomic <- function(indf){
+    warning("Skipping taxonomic checks due to problems with third party services")
+    drops <- c("scientificName")
+    indf[, !(names(indf) %in% drops)]
+    return(indf)
 }

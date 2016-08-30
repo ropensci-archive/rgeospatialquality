@@ -5,8 +5,10 @@ test_that("add_flags plays well with rgbif", {
         d <- rgbif::occ_data(scientificName="Apis mellifera", limit=50, minimal=FALSE)
         d <- format_gq(d$data, source="rgbif")
         dd <- add_flags(d)
-        expect_equal(nrow(dd), 50)
-        expect_true("flags" %in% names(dd))
+        if(is.null(dd) == FALSE){
+            expect_equal(nrow(dd), 50)
+            expect_true("flags" %in% names(dd))
+        }
     }
 })
 
