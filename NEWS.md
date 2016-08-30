@@ -1,3 +1,10 @@
+rgeospatialquality 0.3.3
+========================
+
+### IMPROVEMENTS
+
+* Package catches API offline status. Due to recent instability in third-party software, the geospatial quality API was returning `500` errors. The API has been modified to shut down in those cases, and the package catches these errors.
+
 rgeospatialquality 0.3.2
 ========================
 

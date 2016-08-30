@@ -5,7 +5,7 @@ rgeospatialquality
 
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
-Latest version is *0.3.2*
+Latest version is *0.3.3*
 
 Installation
 ------------
@@ -64,35 +64,10 @@ The response is a list of named elements, each element being the result of a sin
 
 This is what any of the two calls above would return:
 
-    ## $hasCoordinates
-    ## [1] TRUE
-    ## 
-    ## $validCountry
-    ## [1] TRUE
-    ## 
-    ## $validCoordinates
-    ## [1] TRUE
-    ## 
-    ## $hasCountry
-    ## [1] TRUE
-    ## 
-    ## $coordinatesInsideCountry
-    ## [1] TRUE
-    ## 
-    ## $hasScientificName
-    ## [1] TRUE
-    ## 
-    ## $highPrecisionCoordinates
-    ## [1] TRUE
-    ## 
-    ## $coordinatesInsideRangeMap
-    ## [1] FALSE
-    ## 
-    ## $nonZeroCoordinates
-    ## [1] TRUE
-    ## 
-    ## $distanceToRangeMapInKm
-    ## [1] 6874.023
+    ## Warning in gq_parse(req): Due to problems with third-party services, the
+    ## API is not available at this moment. We apologize for any inconvenience.
+
+    ## NULL
 
 Get quality flags for sets of more than one record
 --------------------------------------------------

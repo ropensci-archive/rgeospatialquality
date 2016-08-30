@@ -30,12 +30,14 @@ test_that("add_flags works properly guessing names for rvertnet dataset", {
         dv <- rvertnet::searchbyterm(class="Aves", limit=20)
         dv <- dv$data
         dv <- add_flags(dv, guess_fields=TRUE, quiet=TRUE)
-        # Name is not changed
-        expect_false("decimalLatitude" %in% names(dv))
-        # Name is kept
-        expect_true("decimallatitude" %in% names(dv))
-        # 'flags' element is present
-        expect_true("flags" %in% names(dv))
+        if (is.null(dv) == FALSE) {
+            # Name is not changed
+            expect_false("decimalLatitude" %in% names(dv))
+            # Name is kept
+            expect_true("decimallatitude" %in% names(dv))
+            # 'flags' element is present
+            expect_true("flags" %in% names(dv))
+        }
     }
 })
 

@@ -17,8 +17,10 @@ test_that("add_flags plays well with rvertnet", {
         d <- rvertnet::searchbyterm(class="Aves", limit=50)
         d <- format_gq(d$data, source="rvertnet")
         dd <- add_flags(d)
-        expect_equal(nrow(dd), 50)
-        expect_true("flags" %in% names(dd))
+        if (is.null(dd) == FALSE) {
+            expect_equal(nrow(dd), 50)
+            expect_true("flags" %in% names(dd))
+        }
     }
 })
 
@@ -32,8 +34,10 @@ test_that("add_flags plays well with rinat", {
         if (exists("d")) {
             d <- format_gq(d, source="rinat")
             dd <- add_flags(d, quiet=TRUE)
-            expect_equal(nrow(dd), 20)
-            expect_true("flags" %in% names(dd))
+            if(is.null(dd) == FALSE) {
+                expect_equal(nrow(dd), 20)
+                expect_true("flags" %in% names(dd))
+            }
         }
     }
 })
