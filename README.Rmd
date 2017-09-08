@@ -15,6 +15,8 @@ rgeospatialquality
 [![codecov.io](https://codecov.io/github/ropenscilabs/rgeospatialquality/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/rgeospatialquality?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rgeospatialquality)](http://cran.r-project.org/package=rgeospatialquality)
 
+__THIS PACKAGE IS DEPRECATED - IT NO LONGER WORKS__
+
 `rgeospatialquality` provides R native access to the methods of the [Geospatial Data Quality REST API](https://github.com/VertNet/api-geospatial/blob/master/GeospatialQuality.md). With this API, users can perform some basic quality checks on the geospatial aspect of biodiversity data. See the link above for more information on the API rationale, development, methods and usage.
 
 Latest version is *0.3.3*
